@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Tue Mar 28 05:40:58 2017 Antonin Rapini
-** Last update Wed Mar 29 21:37:49 2017 Antonin Rapini
+** Last update Thu Mar 30 13:00:58 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
@@ -32,6 +32,7 @@ t_header	*my_init_header()
     return (NULL);
   my_memset(header->prog_name, 0, PROG_NAME_LENGTH);
   my_memset(header->comment, 0, COMMENT_LENGTH);
+  my_memset(header->prog_len_str, 0, PROG_LEN_LENGTH);
   return (header);
 }
 

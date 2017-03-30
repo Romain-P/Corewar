@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Mon Mar 27 15:02:04 2017 Antonin Rapini
-** Last update Thu Mar 30 10:26:35 2017 Antonin Rapini
+** Last update Thu Mar 30 12:58:27 2017 Antonin Rapini
 */
 
 #ifndef MY_ASM_H_
@@ -27,6 +27,8 @@
 # define PROG_NAME_LENGTH 128
 # define COMMENT_LENGTH 2048
 
+# define PROG_LEN_LENGTH 8
+# define HEXA_CHARSET "0123456789abcdef"
 # define REG_NUMBER 16
 
 # define IND_SIZE 2
@@ -85,6 +87,7 @@ typedef struct	s_header
 {
   char		prog_name[PROG_NAME_LENGTH];
   char		comment[COMMENT_LENGTH];
+  char		prog_len_str[PROG_LEN_LENGTH];
 }		t_header;
 
 typedef struct	s_cor
