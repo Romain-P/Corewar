@@ -5,7 +5,7 @@
 ** Login   <astek@epitech.net>
 **
 ** Started on  Mon Mar 30 11:14:31 2009 Astek
-** Last update Tue Mar 22 16:44:20 2011 Astek
+** Last update Wed Mar 29 15:32:03 2017 Antonin Rapini
 */
 
 #ifndef _OP_H_
@@ -50,8 +50,6 @@ struct  op_s
    char         nbr_args;
    args_type_t  type[MAX_ARGS_NUMBER];
    char         code;
-   int          nbr_cycles;
-   char         *comment;
 };
 
 typedef struct op_s     op_t;
