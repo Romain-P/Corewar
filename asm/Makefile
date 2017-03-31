@@ -5,7 +5,7 @@
 ## Login   <antonin.rapini@epitech.net>
 ## 
 ## Started on  Tue Nov 29 08:50:17 2016 Antonin Rapini
-## Last update Fri Mar 31 20:20:15 2017 Antonin Rapini
+## Last update Fri Mar 31 21:47:16 2017 Antonin Rapini
 ##
 
 CFLAGS	+= -Wall -Werror -Wextra
@@ -31,6 +31,7 @@ SRC	=	utils/my_open_champion.c	\
 		utils/my_nbrlen.c		\
 		utils/my_line_iscode.c		\
 		utils/my_labellist_utils.c	\
+		utils/my_instlist_utils.c	\
 		sources/my_get_champion.c	\
 		sources/my_get_header.c		\
 		sources/my_get_code.c		\
@@ -39,7 +40,6 @@ SRC	=	utils/my_open_champion.c	\
 		sources/my_check_instruction.c	\
 		sources/my_get_paramtype.c	\
 		sources/my_clear_param.c	\
-		sources/my_instructionlen.c	\
 		sources/my_create_corfile.c	\
 		sources/my_write_header.c	\
 		sources/my_write_instructions.c	\

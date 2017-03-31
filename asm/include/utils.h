@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar  2 17:18:39 2017 Antonin Rapini
-** Last update Fri Mar 31 19:42:40 2017 Antonin Rapini
+** Last update Fri Mar 31 21:40:54 2017 Antonin Rapini
 */
 
 #ifndef UTILS_H_
@@ -37,9 +37,12 @@ void *my_free(void *);
 char *my_int_tostr(int);
 int my_nbrlen(int);
 int my_line_iscode(char *);
-
 t_labellist *my_init_labellist_item();
 void *my_free_labellist_item(t_labellist *);
 void *my_free_labellist(t_labellist *);
+t_instlist *my_init_instlist_item();
+void *my_free_instlist(t_instlist *);
+void *my_free_instlist_item(t_instlist *);
+void *my_free_params(t_param *);
 
 #endif /* !UTILS_H_ */

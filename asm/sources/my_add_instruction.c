@@ -5,13 +5,37 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Fri Mar 31 11:35:56 2017 Antonin Rapini
-** Last update Fri Mar 31 20:12:13 2017 Antonin Rapini
+** Last update Fri Mar 31 21:47:00 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
 #include "my_asm.h"
 #include "sources.h"
 #include "utils.h"
+
+int	my_instructionlen(t_instruct *instruct)
+{
+  int	len;
+  int	i;
+  int	usesindex;
+
+  usesindex = (instruct->code >= 9 && instruct->code <= 15)
+    && instruct->code != 13;
+  i = 0;
+  len = 1;
+  len += instruct->codingbyte != -1 ? 1 : 0;
+  while (instruct->params[i].param)
+    {
+      if (instruct->params[i].type == T_REG)
+	len += 1;
+      else if (instruct->params[i].type == T_IND || usesindex)
+	len += 2;
+      else if (instruct->params[i].type == T_DIR)
+	len += 4;
+      i++;
+    }
+  return (len);
+}
 
 char	*my_get_instruction_name(char *line, int i)
 {
@@ -29,24 +53,20 @@ char	*my_get_instruction_name(char *line, int i)
 t_instlist	*my_get_instruction(char *line, int pos)
 {
   t_instlist	*item;
-  t_instruct	*instruct;
   int		i;
 
   i = 0;
   while (line[i] && (line[i] == ' ' || line[i] == '\t'))
     i++;
-  if ((instruct = malloc(sizeof(t_instruct))) == NULL)
+  if ((item = my_init_instlist_item()) == NULL)
     return (NULL);
-  if ((instruct->name = my_get_instruction_name(line , i)) == NULL)
-    return (NULL);
-  i += my_strlen(instruct->name);
-  if ((instruct->params = my_str_to_params(line + i)) == NULL)
-    return (NULL);
-  if (my_check_instruction(instruct))
-    return (NULL);
-  if ((item = malloc(sizeof(t_instlist))) == NULL)
-    return (NULL);
-  item->instruct = instruct;
+  if ((item->instruct->name = my_get_instruction_name(line , i)) == NULL)
+    return (my_free_instlist_item(item));
+  i += my_strlen(item->instruct->name);
+  if ((item->instruct->params = my_str_to_params(line + i)) == NULL)
+    return (my_free_instlist_item(item));
+  if (my_check_instruction(item->instruct))
+    return (my_free_instlist_item(item));
   item->instruct->pos = pos;
   return (item);
 }
@@ -64,7 +84,6 @@ int		my_add_instruction(int i, t_cor *cor, t_instlist **startinst)
       cor->instructs->next = currinst;
       cor->instructs = cor->instructs->next;
     }
-  cor->instructs->next = NULL;
   if ((*startinst) == NULL)
     (*startinst) = currinst;
   cor->prog_len += my_instructionlen(cor->instructs->instruct);
