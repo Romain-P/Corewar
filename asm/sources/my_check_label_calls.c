@@ -5,14 +5,14 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Fri Mar 31 16:58:16 2017 Antonin Rapini
-** Last update Fri Mar 31 16:59:33 2017 Antonin Rapini
+** Last update Fri Mar 31 18:43:37 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
 #include "my_asm.h"
 #include "utils.h"
 
-int	my_label_exists(t_labellist *labels, char *param)
+int my_label_exists(t_labellist *labels, char *param)
 {
   while (labels != NULL)
     {
