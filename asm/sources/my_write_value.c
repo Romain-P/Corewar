@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar 30 18:44:25 2017 Antonin Rapini
-** Last update Fri Mar 31 02:23:57 2017 Antonin Rapini
+** Last update Fri Mar 31 09:50:52 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -16,12 +16,16 @@
 int	my_write_value(int fd, char *str, int size)
 {
   char	*to_write;
+  int	nbr;
+  int	i;
 
-  if ((to_write = malloc(sizeof(char) * size)) == NULL)
-    return (1);
-  my_memset(to_write, 0, size);
-  my_fillstr_base(to_write, my_getnbr(str, NULL), size, HEXA_CHARSET);
-  write(fd, to_write, size);
-  free(to_write);
+  i = 0;
+  nbr = my_getnbr(str, NULL);
+  to_write = (char *)&nbr;
+  while (i < size)
+    {
+      write(fd, &(to_write[size - 1 - i]), 1);
+      i++;
+    }
   return (0);
 }
