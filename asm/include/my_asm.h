@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Mon Mar 27 15:02:04 2017 Antonin Rapini
-** Last update Thu Mar 30 12:58:27 2017 Antonin Rapini
+** Last update Fri Mar 31 12:54:06 2017 Antonin Rapini
 */
 
 #ifndef MY_ASM_H_
@@ -45,6 +45,7 @@ typedef struct	s_param
 {
   char		*param;
   char		type;
+  int		size;
   int		islabel;
 }		t_param;
 

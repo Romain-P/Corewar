@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 15:41:26 2017 Antonin Rapini
-** Last update Fri Mar 31 10:58:16 2017 Antonin Rapini
+** Last update Fri Mar 31 14:09:13 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -70,6 +70,14 @@ int	my_get_optab_index(char *name)
   return (i);
 }
 
+int	my_get_paramsize(int type, int opcode)
+{
+  int	isindex;
+
+  isindex = (opcode >= 9 && opcode <= 15) && opcode != 13;
+  return (type == 1 ? 1 : type == 4 || isindex ? 2 : 4);
+}
+
 int	my_check_instruction(t_instruct *inst)
 {
   int	i;
@@ -77,20 +85,21 @@ int	my_check_instruction(t_instruct *inst)
   char	type;
 
   if ((j = my_get_optab_index(inst->name)) == -1)
-      return (1);
+    return (1);
   i = 0;
+  inst->code = j + 1;
   while (inst->params[i].param)
     {
       if (i >= (int)(op_tab[j].nbr_args))
 	return (1);
       type = my_get_paramtype(inst->params + i);
       inst->params[i].type = type;
+      inst->params[i].size = my_get_paramsize(type, inst->code);
       my_clear_param(inst->params + i);
       if ((type ^ op_tab[j].type[i]) != op_tab[j].type[i] - type)
 	return (1);
       i++;
     }
-  inst->code = j + 1;
   inst->codingbyte = my_get_codingbyte(inst->code, inst->params);
   return (0);
 }

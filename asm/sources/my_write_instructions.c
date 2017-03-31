@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar 30 17:34:13 2017 Antonin Rapini
-** Last update Fri Mar 31 11:56:36 2017 Antonin Rapini
+** Last update Fri Mar 31 13:55:59 2017 Antonin Rapini
 */
 
 #include "sources.h"
@@ -14,7 +14,26 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void	my_write_instructinfos(int fd, int code, int codingbyte)
+int	my_write_params(int fd, t_param *params, t_labellist *labels, int pos)
+{
+  int	i;
+
+  i = 0;
+  while (params[i].param)
+    {
+      if (params[i].islabel)
+	{
+	  if (my_write_label(fd, &(params[i]), labels, pos))
+	    return (1);
+	}
+      else if (my_write_value(fd, params[i].param, params[i].size))
+	return (1);
+      i++;
+    }
+  return (0);
+}
+
+void	my_write_code(int fd, int code, int codingbyte)
 {
   char	strcode[1];
 
@@ -27,24 +46,14 @@ void	my_write_instructinfos(int fd, int code, int codingbyte)
     }
 }
 
-int my_write_instruct
-(int fd, t_labellist *labels, t_instruct *instruct, int isindex)
+int my_write_instructions(int fd, t_cor *cor)
 {
-  my_write_instructinfos(fd, instruct->code, instruct->codingbyte);
-  if (my_write_params(fd, instruct->params, labels, isindex))
-    return (1);
-  return (0);
-}
-
-int	my_write_instructions(int fd, t_cor *cor)
-{
-  int	code;
-
   while (cor->instructs != NULL)
     {
-      code = cor->instructs->instruct->code;
-      if (my_write_instruct(fd, cor->labels, cor->instructs->instruct,
-			    (code >= 9 && code <= 15) && code != 13))
+      my_write_code(fd, cor->instructs->instruct->code,
+		    cor->instructs->instruct->codingbyte);
+      if (my_write_params(fd, cor->instructs->instruct->params, cor->labels,
+			  cor->instructs->instruct->pos))
 	return (1);
       cor->instructs = cor->instructs->next;
     }

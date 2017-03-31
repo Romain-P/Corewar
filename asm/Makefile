@@ -5,7 +5,7 @@
 ## Login   <antonin.rapini@epitech.net>
 ## 
 ## Started on  Tue Nov 29 08:50:17 2016 Antonin Rapini
-## Last update Fri Mar 31 11:54:08 2017 Antonin Rapini
+## Last update Fri Mar 31 13:53:57 2017 Antonin Rapini
 ##
 
 CFLAGS	+= -Wall -Werror -Wextra
@@ -29,22 +29,22 @@ SRC	=	utils/my_open_champion.c	\
 		utils/my_put_nbr.c		\
 		utils/my_int_tostr.c		\
 		utils/my_nbrlen.c		\
-		sources/my_add_instruction.c	\
-		sources/my_add_label.c		\
-		sources/my_clear_param.c	\
-		sources/my_write_value.c	\
-		sources/my_write_params.c	\
-		sources/my_write_instructions.c	\
-		sources/my_write_header.c	\
 		sources/my_get_champion.c	\
 		sources/my_get_header.c		\
 		sources/my_get_code.c		\
-		sources/my_get_instruction.c	\
 		sources/my_get_label.c		\
-		sources/my_get_paramtype.c	\
+		sources/my_get_instruction.c	\
+		sources/my_add_instruction.c	\
+		sources/my_add_label.c		\
 		sources/my_check_instruction.c	\
+		sources/my_get_paramtype.c	\
+		sources/my_clear_param.c	\
 		sources/my_instructionlen.c	\
 		sources/my_create_corfile.c	\
+		sources/my_write_header.c	\
+		sources/my_write_instructions.c	\
+		sources/my_write_value.c	\
+		sources/my_write_label.c	\
 		asm.c
 
 OBJ	=	$(SRC:.c=.o)
