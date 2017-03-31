@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 21:19:05 2017 Antonin Rapini
-** Last update Fri Mar 31 11:01:01 2017 Antonin Rapini
+** Last update Fri Mar 31 22:00:50 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -20,6 +20,7 @@ void	my_write_prog_len(int fd, t_cor *cor)
   int	i;
 
   i = 0;
+  my_memset(to_write, 0, PROG_LEN_LENGTH);
   bytes = (char *)&(cor->prog_len);
   while (i < PROG_LEN_LENGTH)
     {

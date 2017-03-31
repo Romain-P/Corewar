@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Tue Mar 28 05:40:58 2017 Antonin Rapini
-** Last update Thu Mar 30 13:00:58 2017 Antonin Rapini
+** Last update Fri Mar 31 21:53:09 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
@@ -18,6 +18,8 @@ void *my_free_cor(t_cor *cor)
     {
       if (cor->header != NULL)
 	free(cor->header);
+      my_free_labellist(cor->labels);
+      my_free_instlist(cor->instructs);
       my_free_wordtab(cor->file);
       free(cor);
     }

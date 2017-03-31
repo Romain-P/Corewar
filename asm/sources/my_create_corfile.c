@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 20:56:03 2017 Antonin Rapini
-** Last update Fri Mar 31 16:46:28 2017 Antonin Rapini
+** Last update Fri Mar 31 22:10:34 2017 Antonin Rapini
 */
 
 #include <unistd.h>
@@ -40,7 +40,7 @@ char	*my_create_filename(char *sfile)
   filename[j + 1] = 'c';
   filename[j + 2] = 'o';
   filename[j + 3] = 'r';
-  filename[j + 4] = 0;
+  filename[j + 4] = '\0';
   return (filename);
 }
 
@@ -53,6 +53,7 @@ int	my_create_corfile(t_cor *cor, char *sfile)
     return (1);
   if ((fd = open(corfile_name, O_CREAT| O_WRONLY, 0640)) == -1)
     return (1);
+  free(corfile_name);
   if (my_write_header(fd, cor) == 0)
     {
       if (!my_write_instructions(fd, cor) == 0)
