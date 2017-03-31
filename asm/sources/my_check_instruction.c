@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 15:41:26 2017 Antonin Rapini
-** Last update Fri Mar 31 10:13:23 2017 Antonin Rapini
+** Last update Fri Mar 31 10:58:16 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -77,7 +77,7 @@ int	my_check_instruction(t_instruct *inst)
   char	type;
 
   if ((j = my_get_optab_index(inst->name)) == -1)
-    return (1);
+      return (1);
   i = 0;
   while (inst->params[i].param)
     {

@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 21:19:05 2017 Antonin Rapini
-** Last update Fri Mar 31 10:32:42 2017 Antonin Rapini
+** Last update Fri Mar 31 11:01:01 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -13,14 +13,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void my_write_prog_len(int fd, t_cor *cor)
+void	my_write_prog_len(int fd, t_cor *cor)
 {
   char	to_write[PROG_LEN_LENGTH];
   char	*bytes;
   int	i;
 
   i = 0;
-  my_miniprintf("[%i]",cor->prog_len);
   bytes = (char *)&(cor->prog_len);
   while (i < PROG_LEN_LENGTH)
     {

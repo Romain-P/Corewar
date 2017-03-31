@@ -5,13 +5,27 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 06:43:32 2017 Antonin Rapini
-** Last update Thu Mar 30 10:26:12 2017 Antonin Rapini
+** Last update Fri Mar 31 10:59:57 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
 #include <stdlib.h>
 #include "utils.h"
 #include "sources.h"
+
+int	is_codeline(char *line)
+{
+  int	i;
+
+  i = 0;
+  while (line[i])
+    {
+      if (line[i] != ' ' && line[i] != '\t')
+	return (1);
+      i++;
+    }
+  return (0);
+}
 
 int			my_get_code(int i, t_cor *cor)
 {
@@ -22,7 +36,7 @@ int			my_get_code(int i, t_cor *cor)
 
   while (cor->file[i])
     {
-      if (cor->file[i][0] != COMMENT_CHAR && cor->file[i][0] != '\0')
+      if (is_codeline(cor->file[i]))
 	{
 	  if ((currlabel = my_get_label(cor->file[i], cor->prog_len)) != NULL)
 	    {
