@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Tue Mar 28 06:44:39 2017 Antonin Rapini
-** Last update Fri Mar 31 12:19:18 2017 Antonin Rapini
+** Last update Fri Mar 31 14:44:23 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
@@ -50,6 +50,24 @@ int     fill_header(char *buffer, char *prog_name, char *id, int maxsize)
   return (0);
 }
 
+int	is_headerline(char *line)
+{
+  int	i;
+
+  i = 0;
+  while (line[i])
+    {
+      if (line[i] != ' ' && line[i] != '\t')
+	{
+	  if (line[i] == '#')
+	    return (0);
+	  return (1);
+	}
+      i++;
+    }
+  return (0);
+}
+
 int	my_get_header(char **file, t_header *header)
 {
   int	status;
@@ -60,7 +78,7 @@ int	my_get_header(char **file, t_header *header)
   status = 0;
   while (status != 2 && file[i])
     {
-      if (file[i][0] != '\0' && file[i][0] != COMMENT_CHAR)
+      if (is_headerline(file[i]))
 	{
 	  ret = status == 0 ?
 	    fill_header(file[i], header->prog_name, ".name", PROG_NAME_LENGTH) :
