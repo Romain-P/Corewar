@@ -1,5 +1,6 @@
 .name "kek"
 .comment "lol"
 
-live:	live %256
-	ld %4, r1
+live:	live %1
+	ld 34, r3
+	zjmp %1

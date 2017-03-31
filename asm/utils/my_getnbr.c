@@ -5,10 +5,10 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Sun Nov 20 00:36:16 2016 Antonin Rapini
-** Last update Fri Mar 31 01:25:32 2017 Antonin Rapini
+** Last update Fri Mar 31 10:06:11 2017 Antonin Rapini
 */
 
-int	my_getnbr_rec(char *str, int nbr, int sign, int *ret)
+int my_getnbr_rec(char *str, int nbr, int sign, int *ret)
 {
   if (*str == '-')
     return (my_getnbr_rec(str + 1, nbr, sign * -1, ret));
@@ -24,7 +24,7 @@ int	my_getnbr_rec(char *str, int nbr, int sign, int *ret)
     }
 }
 
-int	my_getnbr(char *str, int *ret)
+int my_getnbr(char *str, int *ret)
 {
   if (ret)
     (*ret) = 0;

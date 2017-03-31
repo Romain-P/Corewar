@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 15:41:26 2017 Antonin Rapini
-** Last update Thu Mar 30 18:48:51 2017 Antonin Rapini
+** Last update Fri Mar 31 10:13:23 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -84,10 +84,10 @@ int	my_check_instruction(t_instruct *inst)
       if (i >= (int)(op_tab[j].nbr_args))
 	return (1);
       type = my_get_paramtype(inst->params + i);
+      inst->params[i].type = type;
       my_clear_param(inst->params + i);
       if ((type ^ op_tab[j].type[i]) != op_tab[j].type[i] - type)
 	return (1);
-      inst->params[i].type = type;
       i++;
     }
   inst->code = j + 1;

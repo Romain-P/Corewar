@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 21:19:05 2017 Antonin Rapini
-** Last update Fri Mar 31 02:27:49 2017 Antonin Rapini
+** Last update Fri Mar 31 10:32:42 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -13,10 +13,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void my_fill_prog_len_str(t_cor *cor)
+void my_write_prog_len(int fd, t_cor *cor)
 {
-  my_fillstr_base(cor->header->prog_len_str, cor->prog_len, PROG_LEN_LENGTH, HEXA_CHARSET);
-  //my_change_endian(cor->header->prog_len_str);
+  char	to_write[PROG_LEN_LENGTH];
+  char	*bytes;
+  int	i;
+
+  i = 0;
+  my_miniprintf("[%i]",cor->prog_len);
+  bytes = (char *)&(cor->prog_len);
+  while (i < PROG_LEN_LENGTH)
+    {
+      to_write[i] = bytes[PROG_LEN_LENGTH - 1 - i];
+      i++;
+    }
+  write(fd, to_write, PROG_LEN_LENGTH);
 }
 
 int my_write_header(int fd, t_cor *cor)
@@ -24,8 +35,7 @@ int my_write_header(int fd, t_cor *cor)
   write(fd, "\0", 1);
   write(fd, COREWAR_EXEC_MAGIC_STR, my_strlen(COREWAR_EXEC_MAGIC_STR));
   write(fd, cor->header->prog_name, PROG_NAME_LENGTH);
-  my_fill_prog_len_str(cor);
-  write(fd, cor->header->prog_len_str, PROG_LEN_LENGTH);
+  my_write_prog_len(fd, cor);
   write(fd, cor->header->comment, COMMENT_LENGTH);
   write(fd, "\0\0\0\0", 4);
   return (0);
