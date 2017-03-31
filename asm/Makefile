@@ -5,7 +5,7 @@
 ## Login   <antonin.rapini@epitech.net>
 ## 
 ## Started on  Tue Nov 29 08:50:17 2016 Antonin Rapini
-## Last update Fri Mar 31 15:41:27 2017 Antonin Rapini
+## Last update Fri Mar 31 16:57:54 2017 Antonin Rapini
 ##
 
 CFLAGS	+= -Wall -Werror -Wextra
@@ -44,6 +44,7 @@ SRC	=	utils/my_open_champion.c	\
 		sources/my_write_instructions.c	\
 		sources/my_write_value.c	\
 		sources/my_write_label.c	\
+		sources/my_check_label_calls.c	\
 		asm.c
 
 OBJ	=	$(SRC:.c=.o)

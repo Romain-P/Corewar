@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar  2 17:18:06 2017 Antonin Rapini
-** Last update Fri Mar 31 14:57:57 2017 Antonin Rapini
+** Last update Fri Mar 31 16:57:19 2017 Antonin Rapini
 */
 
 #ifndef SOURCES_H_
@@ -29,5 +29,6 @@ int my_add_label(int , t_cor *, t_labellist **);
 int my_add_instruction(int, t_cor *, t_instlist **);
 int my_write_label(int, t_param *, t_labellist *, int);
 int my_write_value(int, int, int);
+int my_check_label_calls(t_labellist *, t_instlist *);
 
 #endif /* !SOURCES_H_ */

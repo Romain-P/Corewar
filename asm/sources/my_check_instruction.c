@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 15:41:26 2017 Antonin Rapini
-** Last update Fri Mar 31 14:09:13 2017 Antonin Rapini
+** Last update Fri Mar 31 16:36:01 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -90,8 +90,6 @@ int	my_check_instruction(t_instruct *inst)
   inst->code = j + 1;
   while (inst->params[i].param)
     {
-      if (i >= (int)(op_tab[j].nbr_args))
-	return (1);
       type = my_get_paramtype(inst->params + i);
       inst->params[i].type = type;
       inst->params[i].size = my_get_paramsize(type, inst->code);
@@ -100,6 +98,8 @@ int	my_check_instruction(t_instruct *inst)
 	return (1);
       i++;
     }
+    if (i < (int)(op_tab[j].nbr_args))
+      return (1);
   inst->codingbyte = my_get_codingbyte(inst->code, inst->params);
   return (0);
 }

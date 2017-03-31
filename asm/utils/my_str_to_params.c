@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Jan  4 14:22:56 2017 Antonin Rapini
-** Last update Wed Mar 29 18:30:47 2017 Antonin Rapini
+** Last update Fri Mar 31 16:38:03 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
@@ -17,7 +17,7 @@ int	my_getparamscount(char *str)
   int	wordcount;
 
   wordcount = 0;
-  while (*str)
+  while (*str && *str != '#')
     {
       if (*str != ' ' && *str != ',')
 	{
@@ -42,7 +42,7 @@ void	my_populate_params(t_param *params, char *str, int size)
     {
       if (*str != ',' && *str != ' ')
 	{
-	  while (*str && (*str != ' ' && *str != ','))
+	  while (*str && (*str != ' ' && *str != ',' && *str != '#'))
 	    {
 	      wordsize++;
 	      str++;

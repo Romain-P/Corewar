@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Fri Mar 31 12:40:01 2017 Antonin Rapini
-** Last update Fri Mar 31 16:08:35 2017 Antonin Rapini
+** Last update Fri Mar 31 16:42:33 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
@@ -22,7 +22,7 @@ int	my_write_diff(int fd, t_param *param, int diff)
   max = param->size == 2 ? 255 : 65535;
   if ((str = malloc(sizeof(char) * param->size)) == NULL)
     return (1);
-  if (diff > 0)
+  if (diff >= 0)
     {
       my_write_value(fd, 0 + (diff / max), param->size / 2);
       my_write_value(fd, diff, param->size / 2);

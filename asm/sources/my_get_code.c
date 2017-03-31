@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 06:43:32 2017 Antonin Rapini
-** Last update Fri Mar 31 16:10:51 2017 Antonin Rapini
+** Last update Fri Mar 31 16:19:54 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -44,8 +44,11 @@ int		my_get_code(int i, t_cor *cor)
 	{
 	  if (my_add_label(i, cor, &startlabel))
 	    return (1);
-	  if (my_add_instruction(i, cor, &startinst))
-	    return (1);
+	  if (is_codeline(cor->file[i]))
+	    {
+	      if (my_add_instruction(i, cor, &startinst))
+		return (1);
+	    }
 	}
       i++;
     }
