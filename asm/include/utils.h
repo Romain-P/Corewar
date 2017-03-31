@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar  2 17:18:39 2017 Antonin Rapini
-** Last update Fri Mar 31 11:54:42 2017 Antonin Rapini
+** Last update Fri Mar 31 19:11:45 2017 Antonin Rapini
 */
 
 #ifndef UTILS_H_
@@ -35,5 +35,6 @@ int my_miniprintf(char *, ...);
 void my_put_nbr(int);
 char *my_int_tostr(int);
 int my_nbrlen(int);
+int my_line_iscode(char *);
 
 #endif /* !UTILS_H_ */

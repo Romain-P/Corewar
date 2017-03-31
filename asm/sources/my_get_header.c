@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Tue Mar 28 06:44:39 2017 Antonin Rapini
-** Last update Fri Mar 31 14:44:23 2017 Antonin Rapini
+** Last update Fri Mar 31 19:14:15 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
@@ -21,6 +21,7 @@ int	get_offset(char *str)
       i++;
   return (i);
 }
+
 int     fill_header(char *buffer, char *prog_name, char *id, int maxsize)
 {
   int	i;
@@ -44,27 +45,9 @@ int     fill_header(char *buffer, char *prog_name, char *id, int maxsize)
     }
   if (!buffer[i])
     return (2);
-  while (buffer[++i])
-    if (buffer[i - 1] != ' ' && buffer[i - 1] != COMMENT_CHAR)
-      return (2);
-  return (0);
-}
-
-int	is_headerline(char *line)
-{
-  int	i;
-
-  i = 0;
-  while (line[i])
-    {
-      if (line[i] != ' ' && line[i] != '\t')
-	{
-	  if (line[i] == '#')
-	    return (0);
-	  return (1);
-	}
-      i++;
-    }
+  i++;
+  if (my_line_iscode(buffer + i))
+    return (1);
   return (0);
 }
 
@@ -78,7 +61,7 @@ int	my_get_header(char **file, t_header *header)
   status = 0;
   while (status != 2 && file[i])
     {
-      if (is_headerline(file[i]))
+      if (my_line_iscode(file[i]))
 	{
 	  ret = status == 0 ?
 	    fill_header(file[i], header->prog_name, ".name", PROG_NAME_LENGTH) :
