@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar 30 17:34:13 2017 Antonin Rapini
-** Last update Fri Mar 31 02:11:35 2017 Antonin Rapini
+** Last update Fri Mar 31 11:56:36 2017 Antonin Rapini
 */
 
 #include "sources.h"
@@ -27,7 +27,8 @@ void	my_write_instructinfos(int fd, int code, int codingbyte)
     }
 }
 
-int my_write_instruct(int fd, t_labellist *labels, t_instruct *instruct, int isindex)
+int my_write_instruct
+(int fd, t_labellist *labels, t_instruct *instruct, int isindex)
 {
   my_write_instructinfos(fd, instruct->code, instruct->codingbyte);
   if (my_write_params(fd, instruct->params, labels, isindex))

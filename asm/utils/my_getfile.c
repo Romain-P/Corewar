@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 00:36:33 2017 Antonin Rapini
-** Last update Wed Mar 29 05:13:33 2017 Antonin Rapini
+** Last update Fri Mar 31 11:53:40 2017 Antonin Rapini
 */
 
 #include <sys/types.h>
@@ -31,8 +31,7 @@ char	**my_getfile(char *file)
       free(buffer);
       size++;
     }
-  if (lseek(fd, 0, SEEK_SET) < 0)
-    return (NULL);
+  lseek(fd, 0, SEEK_SET);
   if ((content = malloc(sizeof(char *) * (size + 1))) == NULL)
     return (NULL);
   content[size] = NULL;

@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar 30 18:35:34 2017 Antonin Rapini
-** Last update Fri Mar 31 02:11:21 2017 Antonin Rapini
+** Last update Fri Mar 31 11:55:36 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -24,7 +24,8 @@ int	my_write_param(int fd, t_param *param, t_labellist *labels, int isindex)
   return (0);
 }
 
-int	my_write_params(int fd, t_param *params, t_labellist *labels, int isindex)
+int	my_write_params
+(int fd, t_param *params, t_labellist *labels, int isindex)
 {
   int	i;
 

@@ -5,26 +5,34 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Tue Mar 28 06:44:39 2017 Antonin Rapini
-** Last update Wed Mar 29 06:03:18 2017 Antonin Rapini
+** Last update Fri Mar 31 12:19:18 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
 #include "utils.h"
 #include "my_asm.h"
 
+int	get_offset(char *str)
+{
+  int	i;
+
+  i = 0;
+  while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+      i++;
+  return (i);
+}
 int     fill_header(char *buffer, char *prog_name, char *id, int maxsize)
 {
   int	i;
   int	j;
 
   j = 0;
-  i = 0;
-  while (buffer[i++] == ' ');
-  if (my_strncmp(buffer + i - 1, id, my_strlen(id)) != 0)
+  i = get_offset(buffer);
+  if (my_strncmp(buffer + i, id, my_strlen(id)) != 0)
     return (1);
-  i += my_strlen(id) - 1;
-  while (buffer[i++] == ' ');
-  if (buffer[i - 1] != '"')
+  i += my_strlen(id);
+  i += get_offset(buffer + i);
+  if (buffer[i++] != '"')
     return (2);
   while (buffer[i] && buffer[i] != '"')
     {

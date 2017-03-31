@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 06:43:32 2017 Antonin Rapini
-** Last update Fri Mar 31 10:59:57 2017 Antonin Rapini
+** Last update Fri Mar 31 12:12:49 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -27,38 +27,21 @@ int	is_codeline(char *line)
   return (0);
 }
 
-int			my_get_code(int i, t_cor *cor)
+int		my_get_code(int i, t_cor *cor)
 {
-  t_labellist		*startlabel;
-  t_labellist		*currlabel;
-  t_instlist		*currinst;
-  t_instlist		*startinst;
+  t_labellist	*startlabel;
+  t_instlist	*startinst;
 
+  startlabel = NULL;
+  startinst = NULL;
   while (cor->file[i])
     {
       if (is_codeline(cor->file[i]))
 	{
-	  if ((currlabel = my_get_label(cor->file[i], cor->prog_len)) != NULL)
-	    {
-	      if (cor->labels == NULL)
-		{
-		  cor->labels = currlabel;
-		  startlabel = currlabel;
-		}
-	      else
-		cor->labels = cor->labels->next = currlabel;
-	    }
-	  if ((currinst = my_get_instruction(cor->file[i], cor->prog_len)) == NULL)
+	  if (my_add_label(i, cor, &startlabel))
 	    return (1);
-	  if (cor->instructs == NULL)
-	    {
-	      cor->instructs = currinst;
-	      cor->instructs->next = NULL;
-	      startinst = currinst;
-	    }
-	  else
-	    cor->instructs = cor->instructs->next = currinst;
-	  cor->prog_len += my_instructionlen(cor->instructs->instruct);
+	  if (my_add_instruction(i, cor, &startinst))
+	    return (1);
 	}
       i++;
     }

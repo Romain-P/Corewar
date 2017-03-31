@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 20:56:03 2017 Antonin Rapini
-** Last update Thu Mar 30 17:32:36 2017 Antonin Rapini
+** Last update Fri Mar 31 11:56:10 2017 Antonin Rapini
 */
 
 #include <unistd.h>
@@ -31,10 +31,9 @@ char	*my_create_filename(char *sfile)
   if ((filename = malloc(sizeof(char) * (j + 5))) == NULL)
     return (NULL);
   j = 0;
-  while (sfile[i] != '.')
+  while (sfile[i++] != '.')
     {
-      filename[j] = sfile[i];
-      i++;
+      filename[j] = sfile[i - 1];
       j++;
     }
   filename[j] = '.';
