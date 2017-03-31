@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 06:43:32 2017 Antonin Rapini
-** Last update Fri Mar 31 15:45:08 2017 Antonin Rapini
+** Last update Fri Mar 31 20:13:42 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -43,7 +43,6 @@ int	is_label_char(char c)
 t_labellist	*my_get_label(char *line, int labelpos)
 {
   t_labellist	*item;
-  char		*name;
   int		i;
   int		j;
 
@@ -55,13 +54,10 @@ t_labellist	*my_get_label(char *line, int labelpos)
     j++;
   if (line[j] != ':')
     return (NULL);
-  if ((name = my_strndup(line + i, j - i)) == NULL)
+  if ((item = my_init_labellist_item()) == NULL)
     return (NULL);
-  if ((item = malloc(sizeof(t_labellist))) == NULL)
-    return (NULL);
-  if ((item->label = malloc(sizeof(t_label))) == NULL)
-    return (NULL);
-  item->label->name = name;
+  if ((item->label->name = my_strndup(line + i, j - i)) == NULL)
+    return (my_free_labellist_item(item));
   item->label->pos = labelpos;
   my_remove_label(line, j + 1);
   return (item);
@@ -93,7 +89,6 @@ int		my_add_label(int i, t_cor *cor, t_labellist **startlabel)
 	  cor->labels->next = currlabel;
 	  cor->labels = cor->labels->next;
 	}
-      cor->labels->next = NULL;
       if ((*startlabel) == NULL)
 	(*startlabel) = currlabel;
     }

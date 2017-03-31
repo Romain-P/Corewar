@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar  2 17:18:06 2017 Antonin Rapini
-** Last update Fri Mar 31 16:57:19 2017 Antonin Rapini
+** Last update Fri Mar 31 20:12:38 2017 Antonin Rapini
 */
 
 #ifndef SOURCES_H_
@@ -16,8 +16,6 @@
 t_cor *my_get_champion(char *);
 int my_get_header(char **, t_header *);
 int my_get_code(int, t_cor *);
-t_labellist *my_get_label(char *, int);
-t_instlist *my_get_instruction(char *, int);
 int my_instructionlen(t_instruct *);
 char my_get_paramtype(t_param *);
 int my_check_instruction(t_instruct *);
