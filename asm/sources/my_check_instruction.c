@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 15:41:26 2017 Antonin Rapini
-** Last update Wed Mar 29 20:45:47 2017 Antonin Rapini
+** Last update Thu Mar 30 18:48:51 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -62,6 +62,7 @@ int	my_get_optab_index(char *name)
 {
   int	i;
 
+  i = 0;
   while (op_tab[i].mnemonique && my_strcmp(op_tab[i].mnemonique, name) != 0)
     i++;
   if (op_tab[i].mnemonique == NULL)
@@ -83,6 +84,7 @@ int	my_check_instruction(t_instruct *inst)
       if (i >= (int)(op_tab[j].nbr_args))
 	return (1);
       type = my_get_paramtype(inst->params + i);
+      my_clear_param(inst->params + i);
       if ((type ^ op_tab[j].type[i]) != op_tab[j].type[i] - type)
 	return (1);
       inst->params[i].type = type;

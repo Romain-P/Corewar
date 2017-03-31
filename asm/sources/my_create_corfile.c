@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 20:56:03 2017 Antonin Rapini
-** Last update Wed Mar 29 21:33:13 2017 Antonin Rapini
+** Last update Thu Mar 30 17:32:36 2017 Antonin Rapini
 */
 
 #include <unistd.h>
@@ -55,6 +55,8 @@ int	my_create_corfile(t_cor *cor, char *sfile)
   if ((fd = open(corfile_name, O_CREAT| O_WRONLY, 0640)) == -1)
     return (1);
   if (my_write_header(fd, cor))
+    return (1);
+  if (my_write_instructions(fd, cor))
     return (1);
   close(fd);
   return (0);
