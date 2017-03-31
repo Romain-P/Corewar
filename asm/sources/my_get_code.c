@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 06:43:32 2017 Antonin Rapini
-** Last update Fri Mar 31 12:12:49 2017 Antonin Rapini
+** Last update Fri Mar 31 14:39:30 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -20,7 +20,7 @@ int	is_codeline(char *line)
   i = 0;
   while (line[i])
     {
-      if (line[i] != ' ' && line[i] != '\t')
+      if (line[i] != ' ' && line[i] != '\t' && line[i] != '#')
 	return (1);
       i++;
     }

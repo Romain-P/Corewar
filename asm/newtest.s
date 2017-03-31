@@ -1,8 +1,19 @@
-	.name 		"kek"
-  .comment    "azert"
+# lol
+# kek
+.name "kek"
+.comment "azert"
 
+	live %1
+	zjmp %:live
+	zjmp %:live
+	zjmp %:live
+	zjmp %:live
+	zjmp %:live
+	zjmp %:live
+	zjmp %:live
+	zjmp %:live
+	zjmp %:live
+	zjmp %:live
+	zjmp %:live
 live:	live %1
-	ld 34, r3
-	zjmp %1
-	
 	

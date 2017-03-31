@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar 30 17:34:13 2017 Antonin Rapini
-** Last update Fri Mar 31 13:55:59 2017 Antonin Rapini
+** Last update Fri Mar 31 14:58:12 2017 Antonin Rapini
 */
 
 #include "sources.h"
@@ -17,6 +17,7 @@
 int	my_write_params(int fd, t_param *params, t_labellist *labels, int pos)
 {
   int	i;
+  int	nbr;
 
   i = 0;
   while (params[i].param)
@@ -26,8 +27,12 @@ int	my_write_params(int fd, t_param *params, t_labellist *labels, int pos)
 	  if (my_write_label(fd, &(params[i]), labels, pos))
 	    return (1);
 	}
-      else if (my_write_value(fd, params[i].param, params[i].size))
-	return (1);
+      else
+	{
+	  nbr = my_getnbr(params[i].param, NULL);
+	  if (my_write_value(fd, nbr, params[i].size))
+	    return (1);
+	}
       i++;
     }
   return (0);

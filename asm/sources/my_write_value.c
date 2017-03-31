@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar 30 18:44:25 2017 Antonin Rapini
-** Last update Fri Mar 31 10:17:05 2017 Antonin Rapini
+** Last update Fri Mar 31 14:58:34 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -13,18 +13,16 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int	my_write_value(int fd, char *str, int size)
+int	my_write_value(int fd, int nbr, int size)
 {
   char	*bytes;
   char	*to_write;
-  int	nbr;
   int	i;
 
   if ((to_write = malloc(sizeof(char) * size)) == NULL)
     return (1);
   my_memset(to_write, 0, size);
   i = 0;
-  nbr = my_getnbr(str, NULL);
   bytes = (char *)&nbr;
   while (i < size)
     {
