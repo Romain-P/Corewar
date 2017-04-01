@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 15 09:14:24 2017 romain pillot
-** Last update Thu Mar 30 14:57:42 2017 romain pillot
+** Last update Sat Apr  1 02:30:57 2017 romain pillot
 */
 
 #include "util.h"
@@ -34,14 +34,30 @@ char	*get_filename(char *str)
   return (str);
 }
 
-char	*copystr(char *from, char *to, int index)
+char	*copystr(char *from, int lenf, char *to, int index)
 {
   int	len;
+  int	i;
 
+  i = 0;
   if (!from || !to || index < 0)
     return (NULL);
-  while (*from)
-    to[index++] = *from++;
+  while (i < lenf)
+    to[index++] = from[i++];
   to[index] = 0;
   return (to);
+}
+
+char    *strdup_len(char *str, int len)
+{
+  int	i;
+  char	*new;
+
+  if (!str || !(new = malloc(sizeof(char) * (len + 1))))
+    return (NULL);
+  i = -1;
+  while (++i < len)
+    new[i] = str[i];
+  new[i] = 0;
+  return (new);
 }

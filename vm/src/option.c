@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 12:19:11 2017 romain pillot
-** Last update Thu Mar 30 16:34:21 2017 romain pillot
+** Last update Fri Mar 31 21:07:02 2017 romain pillot
 */
 
 #include "vm.h"
@@ -89,7 +89,7 @@ bool	opt_dump(t_vm *vm, char *arg, char *prog, int mod[2])
       display("-dump: missing argument\n", true);
       return (false);
     }
-  if ((vm->dump_cycles = getnbr(arg)) <= 0)
+  if ((vm->dump_cooldown = getnbr(arg)) <= 0)
     {
       display("-dump: invalid parameter ((int)param > 0)\n", true);
       return (false);
@@ -109,7 +109,6 @@ bool	opt_prog_nbr(t_vm *vm, char *arg, char *prog, int mod[2])
   mod[0] = getnbr(arg);
   if (prog)
     {
-      display_format("Added champion %s (%d, %d)\n", prog, mod[0], mod[1]);
       if (!process_init(vm, prog, mod[0], mod[1]))
 	return (false);
       mod[0] = -1;
@@ -131,7 +130,6 @@ bool	opt_prog_addr(t_vm *vm, char *arg, char *prog, int mod[2])
   mod[1] = getnbr(arg);
   if (prog)
     {
-      display_format("Added champion %s (%d, %d)\n", prog, mod[0], mod[1]);
       if (!process_init(vm, prog, mod[0], mod[1]))
 	return (false);
       mod[0] = -1;

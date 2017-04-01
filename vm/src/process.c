@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 12:48:47 2017 romain pillot
-** Last update Thu Mar 30 16:27:06 2017 romain pillot
+** Last update Sat Apr  1 03:52:11 2017 romain pillot
 */
 
 #include "vm.h"
@@ -37,22 +37,78 @@ t_process       *process_init(t_vm *vm, char *prog, int id, int start_pc)
   char		*content;
 
   if ((file = open_file(prog)) == -1 ||
-      !(content = file_content(file)) ||
-      !(process = malloc(sizeof(t_process))))
+      !(process = malloc(sizeof(t_process))) ||
+      !(content = file_content(process, file)))
     return (NULL);
   if (!valid_program(content) || !id || !start_pc)
     {
-      fdisplay_format(!id || !start_pc ?
+      fdisplay_format(id && start_pc ?
 		      "%s: invalid program (invalid magic)\n" :
-		      "%s: invalid parameters ((int)param > 0)\n", prog);
+		      "%s: invalid option's parameter ((int)param > 0)\n", prog);
       free(process);
       return (NULL);
     }
-  process->name = decode_header_name(content);
+  decode_header_name(process->name, content);
   process->id = next_process_id(vm->processes, id);
-  process->instructions = strdupl(content + HEADER_LENGTH);
+  process->data_addr = start_pc;
+  process->pc = start_pc;
+  process->data = strdup_len(content + HEADER_LENGTH, process->data_len);
   list_add(vm->processes, process);
-  free(content);
+  safe_free(content);
   close(file);
   return (process);
+}
+
+/*
+** TODO: improve space between processes when a
+**       starting address is specified (currently jump + 100 bytes)
+*/
+static void	write_data(char *data, int len, char mem[MEM_SIZE], int index)
+{
+  int		i;
+  bool		enough_place;
+
+  i = -1;
+  while (++i < len && (enough_place = !(mem[(index + i) % MEM_SIZE])));
+  if (!enough_place)
+    return (write_data(data, len, mem, index + i + 500));
+  i = -1;
+  while (++i < len)
+    mem[(index + i) % MEM_SIZE] = data[i];
+}
+
+void		process_insertall(t_vm *vm)
+{
+  int		total_data;
+  int		between;
+  t_elem	*proc;
+  int		start_addr;
+
+  total_data = 0;
+  proc = vm->processes->first;
+  while (proc)
+    {
+      total_data += ((t_process *) proc->get)->data_len;
+      proc = proc->next;
+    }
+  between = (MEM_SIZE - total_data) / vm->processes->size;
+  total_data = 0;
+  proc = vm->processes->first;
+  while (proc)
+    {
+      write_data(((t_process *) proc->get)->data,
+		 ((t_process *) proc->get)->data_len, vm->memory,
+		 (start_addr =((t_process *) proc->get)->data_addr) == -1 ?
+		 total_data : start_addr);
+      total_data += start_addr == -1 ?
+	between + ((t_process *) proc->get)->data_len : 0;
+      proc = proc->next;
+    }
+}
+
+void	process_kill(t_vm *vm, t_process **ptr)
+{
+  safe_free(list_dremove(vm->processes, (void **) ptr));
+  safe_free((*ptr)->data);
+  *ptr = NULL;
 }

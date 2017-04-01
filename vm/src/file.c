@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 14:03:00 2017 romain pillot
-** Last update Fri Mar 31 13:17:05 2017 romain pillot
+** Last update Sat Apr  1 03:27:33 2017 romain pillot
 */
 
 #include "util.h"
@@ -14,26 +14,32 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-char		*file_content(int file)
+char			*file_content(t_process *process, int file)
 {
-  char		*content;
-  char		buffer[1024 + 1];
-  int		bytes;
-  int		len;
+  unsigned char		*content;
+  unsigned char		buffer[1024 + 1];
+  int			bytes;
+  int			len;
 
   content = NULL;
   len = 0;
   while ((bytes = read(file, buffer, 1024)))
     {
       if (bytes == -1)
-	break;
+        break;
       buffer[bytes] = 0;
-            content = content ?
-	      copystr(malloc(sizeof(char) * (len += bytes)), buffer, 0) :
-	      copystr(realloc(content, sizeof(char) * (len += bytes)), buffer, len - bytes);
+      len += bytes;
+      content = !content ?
+	copystr(buffer, bytes, malloc(sizeof(char) * (len + 1)), 0) :
+	copystr(buffer, bytes, realloc(content, sizeof(char) * (len + 1)), len - bytes);
     }
-  if (bytes == -1 && content)
-    free(content);
+  if (bytes == -1)
+    {
+      display("Error: can't read the file\n", true);
+      safe_free(content);
+      return (NULL);
+    }
+  process->data_len = len - HEADER_LENGTH;
   return (content);
 }
 

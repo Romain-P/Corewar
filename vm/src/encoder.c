@@ -5,22 +5,32 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 14:06:31 2017 romain pillot
-** Last update Thu Mar 30 14:12:19 2017 romain pillot
+** Last update Sat Apr  1 00:50:47 2017 romain pillot
 */
 
 #include "vm.h"
 #include <stdbool.h>
 
-bool	valid_program(char *content)
+int	bytes_to_int(unsigned char a,
+		     unsigned char b,
+		     unsigned char c,
+		     unsigned char d)
 {
-  //TODO: check magic code
-  return (true);
+  return ((a << 24) + (b << 16) + (c << 8) + d);
 }
 
-char	*decode_header_name(char *content)
+bool	valid_program(unsigned char *bytes)
 {
-  char	*name;
+  return (bytes_to_int(bytes[0], bytes[1], bytes[2], bytes[3])
+	  == COREWAR_EXEC_MAGIC);
+}
 
-  //TODO: decode header name
-  return (name);
+void	decode_header_name(char name[PROG_NAME_LENGTH], unsigned char *content)
+{
+  int	i;
+
+  i = -1;
+  while (++i < PROG_NAME_LENGTH && content[i + MAGIC_LENGTH])
+    name[i] = content[i + MAGIC_LENGTH];
+  name[i] = 0;
 }

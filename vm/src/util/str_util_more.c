@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar  8 10:25:12 2017 romain pillot
-** Last update Wed Mar 15 13:01:58 2017 romain pillot
+** Last update Fri Mar 31 15:46:28 2017 romain pillot
 */
 
 #include <stdbool.h>
@@ -42,7 +42,7 @@ char	*strdupl(char *str)
   char	*new;
   char	*hold;
 
-  if (!(hold = (new = malloc(sizeof(char) * (str_length(str) + 1)))))
+  if (!str || !(hold = (new = malloc(sizeof(char) * (str_length(str) + 1)))))
     return (NULL);
   while (*str)
     *new++ = *str++;

@@ -5,7 +5,7 @@
 ## Login   <romain.pillot@epitech.net>
 ## 
 ## Started on  Sat Oct 29 17:09:21 2016 romain pillot
-## Last update Thu Mar 30 14:08:50 2017 romain pillot
+## Last update Sat Apr  1 03:47:12 2017 romain pillot
 ##
 
 CC	=	gcc
@@ -15,6 +15,7 @@ NAME	=	corewar
 RM	=	rm -f
 
 SRCS	=	src/main.c			\
+		src/core.c			\
 		src/option.c			\
 		src/list.c			\
 		src/encoder.c			\
@@ -31,7 +32,7 @@ SRCS	=	src/main.c			\
 
 OBJS	=	$(SRCS:.c=.o)
 
-CFLAGS	+=	-Iinclude -g #-Werror -Wall -Wextra
+CFLAGS	+=	-Iinc -g #-Werror -Wall -Wextra
 
 all:	$(NAME)
 
