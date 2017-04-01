@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:32:39 2017 romain pillot
-** Last update Thu Mar 30 15:26:02 2017 romain pillot
+** Last update Sat Apr  1 01:05:46 2017 romain pillot
 */
 
 #ifndef VM_H_
@@ -17,7 +17,7 @@
 /*
 ** Magic code
 */
-# define COREWAR_EXEC_MAGIC	0xea83f3 
+# define COREWAR_EXEC_MAGIC	0xea83f3
 
 /*
 ** OP argument types
@@ -46,7 +46,7 @@
 # define COMMENT_LENGTH		2048
 # define MAGIC_LENGTH		4
 # define LEN_LENGTH		8
-# define HEADER_LENGTH		(128 + 2048 + 4 + 8)
+# define HEADER_LENGTH		2192
 
 /*
 ** Cycles
@@ -72,19 +72,29 @@ typedef struct	op_s
   char		*comment;
 }		op_t;
 
+/*
+** On process Fork:
+** `data_len` contains the process instructions length,
+** that should be used to get the instructions of the process
+** from its starting address in the memory (cached in data_addr)
+*/
 typedef struct	s_process
 {
-  char		*name;
+  char		name[PROG_NAME_LENGTH];
   int		id;
-  char		*instructions;
-  int		waiting_cycles;
+  unsigned char	*data;
+  int		data_addr;
+  int		data_len;
+  int		pc;
+  int		cycle_cooldown;
+  int		live_cooldown;
   char		registers[REG_NUMBER][REG_SIZE];
 }		t_process;
 
 typedef struct	s_vm
 {
-  char		memory[MEM_SIZE];
-  int		dump_cycles;
+  unsigned char	memory[MEM_SIZE];
+  int		dump_cooldown;
   t_list	*processes;
 }		t_vm;
 
@@ -92,8 +102,15 @@ t_process	*process_init(t_vm *vm, char *prog, int id, int start_pc);
 
 void		process_kill(t_vm *vm, t_process **ptr);
 
-char		*decode_header_name(char *prog_content);
+void		process_insertall(t_vm *vm);
 
-bool		valid_program(char *prog_content);
+int		bytes_to_int(unsigned char a,
+			     unsigned char b,
+			     unsigned char c,
+			     unsigned char d);
+
+void		decode_header_name(char name[PROG_NAME_LENGTH], unsigned char *content);
+
+bool		valid_program(unsigned char *prog_content);
 
 #endif /** !VM_H_ **/

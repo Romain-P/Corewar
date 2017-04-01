@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar  2 16:17:22 2017 romain pillot
-** Last update Thu Mar 30 13:38:35 2017 romain pillot
+** Last update Sat Apr  1 02:29:58 2017 romain pillot
 */
 
 #ifndef UTIL_H_
@@ -43,6 +43,8 @@ bool	tab_containstr(char **tab, char *str);
 
 char	*strdupl(char *str);
 
+char	*strdup_len(char *str, int len);
+
 void	safe_freetab(char **tab);
 
 char	*concatstr(char *a, char *b, bool free_a);
@@ -65,7 +67,7 @@ char	**filltab(char **tab, void *e, int size);
 
 char	*fillstr(char *ptr, char c, int size);
 
-char	*copystr(char *from, char *to, int index);
+char	*copystr(char *from, int flen, char *to, int index);
 
 void	*memfill(void *ptr, int val, int bytes);
 

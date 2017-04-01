@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 11:47:58 2017 romain pillot
-** Last update Thu Mar 30 14:43:23 2017 romain pillot
+** Last update Sat Apr  1 02:14:42 2017 romain pillot
 */
 
 #include "list.h"
@@ -32,8 +32,15 @@ t_elem		*list_add(t_list *list, void *data)
   elem->next = NULL;
   elem->previous = list->last;
   if (list->last)
-    list->last->next = elem;
-  list->last = elem;
+    {
+      list->last->next = elem;
+      list->last = elem;
+    }
+  else
+    {
+      list->first = elem;
+      list->last = elem;
+    }
   list->size++;
   return (elem);
 }
