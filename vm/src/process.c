@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 12:48:47 2017 romain pillot
-** Last update Sat Apr  1 03:52:11 2017 romain pillot
+** Last update Sat Apr  1 06:49:32 2017 romain pillot
 */
 
 #include "vm.h"
@@ -50,8 +50,8 @@ t_process       *process_init(t_vm *vm, char *prog, int id, int start_pc)
     }
   decode_header_name(process->name, content);
   process->id = next_process_id(vm->processes, id);
-  process->data_addr = start_pc;
-  process->pc = start_pc;
+  process->data_addr = (process->pc = start_pc);
+  process->cycle_cooldown = (process->last_live_cycle = 0);
   process->data = strdup_len(content + HEADER_LENGTH, process->data_len);
   list_add(vm->processes, process);
   safe_free(content);
@@ -108,7 +108,6 @@ void		process_insertall(t_vm *vm)
 
 void	process_kill(t_vm *vm, t_process **ptr)
 {
-  safe_free(list_dremove(vm->processes, (void **) ptr));
   safe_free((*ptr)->data);
-  *ptr = NULL;
+  safe_free(list_dremove(vm->processes, (void **) ptr));
 }

@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:32:39 2017 romain pillot
-** Last update Sat Apr  1 04:05:40 2017 romain pillot
+** Last update Sat Apr  1 06:01:32 2017 romain pillot
 */
 
 #ifndef VM_H_
@@ -52,8 +52,8 @@
 ** Cycles
 */
 # define CYCLE_TO_DIE		1536
-# define CYCLE_DELTA		5
-# define NBR_LIVE		40
+# define CYCLE_DELTA		4
+# define NBR_LIVE		2048
 
 /*
 ** Memory
@@ -87,7 +87,7 @@ typedef struct	s_process
   int		data_len;
   int		pc;
   int		cycle_cooldown;
-  int		live_cooldown;
+  int		last_live_cycle;
   char		registers[REG_NUMBER][REG_SIZE];
 }		t_process;
 
@@ -96,6 +96,10 @@ typedef struct	s_vm
   unsigned char	memory[MEM_SIZE];
   int		dump_cooldown;
   int		live_cooldown;
+  int		cycle_to_die;
+  int		current_cycle;
+  int		last_die_cycle;
+  bool		running;
   t_list	*processes;
 }		t_vm;
 

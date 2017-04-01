@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:33:03 2017 romain pillot
-** Last update Sat Apr  1 04:05:58 2017 romain pillot
+** Last update Sat Apr  1 07:43:06 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -18,6 +18,8 @@ static int	free_and_exit(t_vm **to_free, int statement, char *err)
 {
   if (err)
     display(err, true);
+  if ((*to_free)->processes)
+    free((*to_free)->processes);
   if (*to_free)
     free(*to_free);
   *to_free = NULL;
@@ -32,7 +34,11 @@ static t_vm	*vm_init()
     return (NULL);
   vm->processes = list_create();
   vm->dump_cooldown = -1;
-  vm->live_coolodwn = -1;
+  vm->live_cooldown = NBR_LIVE;
+  vm->cycle_to_die = CYCLE_TO_DIE;
+  vm->last_die_cycle = 0;
+  vm->current_cycle = 0;
+  vm->running = true;
   memfill(vm->memory, 0, MEM_SIZE);
   return (vm);
 }
@@ -57,6 +63,10 @@ void	dump_memory(char memory[MEM_SIZE])
 
   i = -1;
   while (++i < MEM_SIZE)
-    display_format("%d-", memory[i]);
+    {
+      display_format("%d-", memory[i]);
+      if (i && !(i % 32))
+	display_char('\n', false);
+    }
   display_char('\n', false);
 }
