@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Jan  4 14:22:56 2017 Antonin Rapini
-** Last update Fri Mar 31 16:38:03 2017 Antonin Rapini
+** Last update Sat Apr  1 07:34:37 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
@@ -19,10 +19,10 @@ int	my_getparamscount(char *str)
   wordcount = 0;
   while (*str && *str != '#')
     {
-      if (*str != ' ' && *str != ',')
+      if (*str != ' ' && *str != ',' && *str != '\t' && *str != '#')
 	{
 	  wordcount++;
-	  while (*str && (*str != ' ' && *str != ','))
+	  while (*str && *str != ' ' && *str != ',' && *str != '\t' && *str != '#')
 	    str++;
 	}
       else
@@ -40,9 +40,9 @@ void	my_populate_params(t_param *params, char *str, int size)
   arr_i = 0;
   while (arr_i < size)
     {
-      if (*str != ',' && *str != ' ')
+      if (*str != ',' && *str != ' ' && *str != '\t' && *str != '#')
 	{
-	  while (*str && (*str != ' ' && *str != ',' && *str != '#'))
+	  while (*str && *str != ' ' && *str != ',' && *str != '#' && *str != '\t')
 	    {
 	      wordsize++;
 	      str++;

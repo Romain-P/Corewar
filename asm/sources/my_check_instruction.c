@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 15:41:26 2017 Antonin Rapini
-** Last update Fri Mar 31 16:36:01 2017 Antonin Rapini
+** Last update Sat Apr  1 07:36:45 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -90,7 +90,8 @@ int	my_check_instruction(t_instruct *inst)
   inst->code = j + 1;
   while (inst->params[i].param)
     {
-      type = my_get_paramtype(inst->params + i);
+      if ((type = my_get_paramtype(inst->params + i)) == -1)
+	return (1);
       inst->params[i].type = type;
       inst->params[i].size = my_get_paramsize(type, inst->code);
       my_clear_param(inst->params + i);
