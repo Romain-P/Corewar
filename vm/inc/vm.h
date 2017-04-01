@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:32:39 2017 romain pillot
-** Last update Sat Apr  1 03:28:52 2017 romain pillot
+** Last update Sat Apr  1 04:05:40 2017 romain pillot
 */
 
 #ifndef VM_H_
@@ -95,6 +95,7 @@ typedef struct	s_vm
 {
   unsigned char	memory[MEM_SIZE];
   int		dump_cooldown;
+  int		live_cooldown;
   t_list	*processes;
 }		t_vm;
 
@@ -114,5 +115,7 @@ void		decode_header_name(char name[PROG_NAME_LENGTH], unsigned char *content);
 bool		valid_program(unsigned char *prog_content);
 
 void		dump_memory(char memory[MEM_SIZE]);
+
+void		launch_cycles(t_vm *vm);
 
 #endif /** !VM_H_ **/
