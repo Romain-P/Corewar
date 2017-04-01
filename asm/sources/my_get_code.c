@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 06:43:32 2017 Antonin Rapini
-** Last update Fri Mar 31 19:12:43 2017 Antonin Rapini
+** Last update Sat Apr  1 07:28:23 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -29,7 +29,7 @@ int		my_get_code(int i, t_cor *cor)
 	  if (my_line_iscode(cor->file[i]))
 	    {
 	      if (my_add_instruction(i, cor, &startinst))
-		return (1);
+		  return (1);
 	    }
 	}
       i++;
