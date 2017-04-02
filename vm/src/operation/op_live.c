@@ -5,12 +5,27 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sun Apr  2 03:16:05 2017 romain pillot
-** Last update Sun Apr  2 09:51:15 2017 romain pillot
+** Last update Sun Apr  2 15:28:58 2017 Antonin Rapini
 */
 
 #include "operation.h"
 
-void	op_live(t_vm *vm, t_process *process, t_param params[4])
+void		op_live(t_vm *vm, t_process *process, t_param params[4])
 {
-  
+  int		value;
+  int		i;
+  t_elem	*curr;
+
+  curr = vm->processes->first;
+  i = 0;
+  value = parse_value(params[0], vm, process, NO_MOD);
+  while (curr != NULL)
+    {
+      if (value == curr->get->id)
+	{
+	  curr->get->last_live_cycle = vm->current_cycle;
+	  return ;
+	}
+      curr = curr->next;
+    }
 }

@@ -5,12 +5,27 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sun Apr  2 03:16:05 2017 romain pillot
-** Last update Sun Apr  2 09:57:50 2017 romain pillot
+** Last update Sun Apr  2 15:55:34 2017 Antonin Rapini
 */
 
 #include "operation.h"
 
 void	op_add(t_vm *vm, t_process *process, t_param params[4])
 {
-  
+  int	registera;
+  int	registerb;
+  int	registerc;
+
+  registera = parse_value(params[0], vm, process, NO_MOD);
+  registerb = parse_value(params[1], vm, process, NO_MOD);
+  registerc = parse_value(params[2], vm, process, NO_MOD);
+  if (registera > 16 || registerb > 16 || registerc > 16 || registera <= 0
+      || registerb <= 0 || registerc <= 0)
+    {
+      //process->carry = 0;
+      return ;
+    }
+  process->registers[registerc - 1] =
+    process->registers[registera - 1] + process->registers[registerb - 1];
+  //process->carry = 1;
 }

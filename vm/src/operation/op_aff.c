@@ -5,12 +5,19 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sun Apr  2 03:16:05 2017 romain pillot
-** Last update Sun Apr  2 09:40:34 2017 romain pillot
+** Last update Sun Apr  2 17:26:21 2017 Antonin Rapini
 */
 
 #include "operation.h"
 
 void	op_aff(t_vm *vm, t_process *process, t_param params[4])
 {
-  
+  int	reg;
+  int	value;
+
+  reg = parse_value(params[0], vm, process, NO_MOD);
+  if (reg > 16 || reg <= 0)
+    return ;
+  value = process->registers[reg - 1];
+  display_char(value % 256, false);
 }
