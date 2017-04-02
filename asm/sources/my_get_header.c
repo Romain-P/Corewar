@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Tue Mar 28 06:44:39 2017 Antonin Rapini
-** Last update Fri Mar 31 19:14:15 2017 Antonin Rapini
+** Last update Sun Apr  2 09:02:32 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
@@ -74,5 +74,5 @@ int	my_get_header(char **file, t_header *header)
 	}
       i++;
     }
-  return (i);
+  return (status < 1 ? -1 : i);
 }

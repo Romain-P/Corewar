@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 06:43:32 2017 Antonin Rapini
-** Last update Fri Mar 31 20:13:42 2017 Antonin Rapini
+** Last update Sun Apr  2 08:59:50 2017 Antonin Rapini
 */
 
 #include "my_asm.h"
@@ -80,7 +80,7 @@ int		my_add_label(int i, t_cor *cor, t_labellist **startlabel)
 
   if ((currlabel = my_get_label(cor->file[i], cor->prog_len)) != NULL)
     {
-      if (my_checklabel(currlabel, cor->labels))
+      if (my_checklabel(currlabel, (*startlabel)))
 	return (1);
       if (cor->labels == NULL)
 	cor->labels = currlabel;
