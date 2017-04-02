@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 15:41:26 2017 Antonin Rapini
-** Last update Sat Apr  1 07:36:45 2017 Antonin Rapini
+** Last update Sun Apr  2 15:23:45 2017 romain pillot
 */
 
 #include "my_asm.h"
@@ -13,7 +13,7 @@
 #include "sources.h"
 #include <stdlib.h>
 
-static t_op op_tab[] =
+static t_op const op_tab[] =
 {
   {"live", 1, {T_DIR}, 1},
   {"ld", 2, {T_DIR | T_IND, T_REG}, 2},

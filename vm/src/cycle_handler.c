@@ -1,4 +1,3 @@
-
 /*
 ** core.c for  in /home/romain.pillot/projects/CPE_2016_corewar/vm/src
 ** 
@@ -6,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 03:46:54 2017 romain pillot
-** Last update Sun Apr  2 10:01:45 2017 romain pillot
+** Last update Sun Apr  2 15:09:09 2017 romain pillot
 */
 
 #include "vm.h"
@@ -22,13 +21,16 @@ static void	on_cycle(t_vm *vm, void **proc_ptr)
   int		param_bytes;
 
   proc = (t_process *) (*proc_ptr);
+  printf("%d-", proc->pc);
+  unsigned char c = vm->memory[proc->pc % MEM_SIZE];
   if (vm->current_cycle - vm->last_die_cycle == vm->cycle_to_die &&
       proc->last_live_cycle <= vm->last_die_cycle)
     return (process_kill(vm, (t_process **) proc_ptr));
-  else if ((op = parse_operation(vm->memory[proc->pc]))->code != OP_NULL &&
+  else if ((op = parse_operation(vm->memory[proc->pc % MEM_SIZE]))->code != OP_NULL &&
 	   (param_bytes = parse_params(proc, vm->memory, op, params)))
     {
       op->execute(vm, proc, params);
+      display("done", false);
       if (op->code != OP_ZJMP)
 	proc->pc += param_bytes;
     }
@@ -73,7 +75,7 @@ void		launch_cycles(t_vm *vm)
       while (elem)
 	{
 	  next = elem->next;
-	  on_cycle(vm, &elem->get);
+	  on_cycle(vm, &(elem->get));
 	  elem = next;
 	}
       if ((vm->live_cooldown) <= 0)

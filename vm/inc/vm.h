@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:32:39 2017 romain pillot
-** Last update Sun Apr  2 14:13:20 2017 Antonin Rapini
+** Last update Sun Apr  2 14:40:52 2017 romain pillot
 */
 
 #ifndef VM_H_
@@ -114,7 +114,7 @@ typedef struct	s_process
 
 typedef struct	s_vm
 {
-  unsigned char	memory[MEM_SIZE];
+  unsigned char	memory[MEM_SIZE + 1];
   int		dump_cooldown;
   int		live_cooldown;
   int		cycle_to_die;

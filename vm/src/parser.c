@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 23:25:16 2017 romain pillot
-** Last update Sun Apr  2 08:57:09 2017 romain pillot
+** Last update Sun Apr  2 14:37:45 2017 romain pillot
 */
 
 #include "vm.h"
@@ -75,7 +75,7 @@ int		parse_params(t_process *process,
       if ((params[i].type = param_type(coding_byte, i)) != T_DIR &&
 	  params[i].type != T_IND && params[i].type != T_REG)
         return (0);
-      params[i].value = funcs[params[i].type](process, mem, &pc);
+	params[i].value = funcs[params[i].type - 1](process, mem, &pc);
     }
   return (pc);
 }
@@ -84,5 +84,5 @@ t_op	*parse_operation(unsigned char op)
 {
   return (op >= 1 && op <= OPS_NBR ?
 	  &(ops[op - 1]) :
-	  &(ops[OPS_NBR + 1]));
+	  &(ops[OPS_NBR]));
 }
