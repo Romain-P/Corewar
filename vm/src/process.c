@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 12:48:47 2017 romain pillot
-** Last update Sun Apr  2 15:48:54 2017 romain pillot
+** Last update Sun Apr  2 18:44:48 2017 romain pillot
 */
 
 #include "vm.h"
@@ -63,18 +63,21 @@ t_process       *process_init(t_vm *vm, char *prog, int id, int start_pc)
 ** TODO: improve space between processes when a
 **       starting address is specified (currently jump + 100 bytes)
 */
-static void	write_data(char *data, int len, unsigned char mem[MEM_SIZE], int index)
+static void	write_data(t_process *process, unsigned char mem[MEM_SIZE], int index)
 {
   int		i;
   bool		enough_place;
 
   i = -1;
-  while (++i < len && (enough_place = !(mem[(index + i) % MEM_SIZE])));
+  while (++i < process->data_len &&
+	 (enough_place = !(mem[(index + i) % MEM_SIZE])));
   if (!enough_place)
-    return (write_data(data, len, mem, index + i + 500));
+    return (write_data(process, mem, index + i + 500));
+  process->pc = index;
+  process->data_addr = index;
   i = -1;
-  while (++i < len)
-    mem[(index + i) % MEM_SIZE] = data[i];
+  while (++i < process->data_len)
+    mem[(index + i) % MEM_SIZE] = process->data[i];
 }
 
 void		process_insertall(t_vm *vm)
@@ -96,9 +99,8 @@ void		process_insertall(t_vm *vm)
   proc = vm->processes->first;
   while (proc)
     {
-      write_data(((t_process *) proc->get)->data,
-		 ((t_process *) proc->get)->data_len, vm->memory,
-		 (start_addr =((t_process *) proc->get)->data_addr) == -1 ?
+      write_data((t_process *) proc->get, vm->memory,
+		 (start_addr = ((t_process *) proc->get)->data_addr) == -1 ?
 		 total_data : start_addr);
       total_data += start_addr == -1 ?
 	between + ((t_process *) proc->get)->data_len : 0;

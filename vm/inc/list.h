@@ -5,11 +5,13 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 11:48:07 2017 romain pillot
-** Last update Thu Mar 30 14:44:13 2017 romain pillot
+** Last update Sun Apr  2 20:17:51 2017 romain pillot
 */
 
 #ifndef LIST_H_
 # define LIST_H_
+
+# include <stdbool.h>
 
 typedef struct	s_elem
 {
@@ -49,5 +51,10 @@ void		*list_dremove(t_list *list, void **data);
 **	   from the given list.
 */
 void		*list_eremove(t_list *list, t_elem *elem);
+
+/*
+** Free all
+*/
+void		list_removeall(t_list *list, bool free_data);
 
 #endif /* !LIST_H_ */

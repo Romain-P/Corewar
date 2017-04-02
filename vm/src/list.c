@@ -5,11 +5,10 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 11:47:58 2017 romain pillot
-** Last update Sat Apr  1 02:14:42 2017 romain pillot
+** Last update Sun Apr  2 20:17:18 2017 romain pillot
 */
 
 #include "list.h"
-#include <stdbool.h>
 #include <stdlib.h>
 
 t_list		*list_create()
@@ -72,4 +71,21 @@ void		*list_eremove(t_list *list, t_elem *elem)
   free(elem);
   list->size--;
   return (data);
+}
+
+void		list_removeall(t_list *list, bool free_data)
+{
+  t_elem        *elem;
+  t_elem	*next;
+  void		*data;
+
+  elem = list->first;
+  while (elem)
+    {
+      next = elem->next;
+      data = list_eremove(list, elem);
+      if (free_data && data)
+	free(data);
+      elem = next;
+    }
 }

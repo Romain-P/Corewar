@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:33:03 2017 romain pillot
-** Last update Sun Apr  2 15:49:12 2017 romain pillot
+** Last update Sun Apr  2 20:20:47 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -13,11 +13,13 @@
 #include "vm.h"
 #include "option.h"
 #include "util.h"
+#include "list.h"
 
 static int	free_and_exit(t_vm **to_free, int statement, char *err)
 {
   if (err)
     display(err, true);
+  list_removeall((*to_free)->processes, true);
   if ((*to_free)->processes)
     free((*to_free)->processes);
   if (*to_free)
@@ -53,7 +55,6 @@ int	main(int ac, char **args)
     return (free_and_exit(&vm, 84,
 			  "Error: need at least 2 programs and at most 4 programs.\n"));
   launch_cycles(vm);
-  dump_memory(vm->memory, 150);
   return (free_and_exit(&vm, EXIT_SUCCESS, NULL));
 }
 

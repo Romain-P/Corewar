@@ -5,13 +5,34 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 03:46:54 2017 romain pillot
-** Last update Sun Apr  2 15:30:51 2017 romain pillot
+** Last update Sun Apr  2 20:07:40 2017 romain pillot
 */
 
 #include "vm.h"
 #include "util.h"
 #include <stdbool.h>
 #include <stdlib.h>
+
+static bool	on_cooldown(t_vm *vm, t_process *proc)
+{
+  t_op          *op;
+  t_param       params[4];
+  int           param_bytes;
+
+  if (!(proc->cycle_cooldown))
+    {
+      if ((op = parse_operation(vm->memory[proc->pc % MEM_SIZE]))->code != OP_NULL &&
+	  (param_bytes = parse_params(proc, vm->memory, op, params)))
+	op->execute(vm, proc, params);
+      proc->pc += !param_bytes ? 1 : param_bytes;
+      proc->cycle_cooldown = -1;
+    }
+  else if (proc->cycle_cooldown > 0)
+      proc->cycle_cooldown--;
+  else
+    return (false);
+  return (true);
+}
 
 static void	on_cycle(t_vm *vm, void **proc_ptr)
 {
@@ -21,19 +42,15 @@ static void	on_cycle(t_vm *vm, void **proc_ptr)
   int		param_bytes;
 
   proc = (t_process *) (*proc_ptr);
-  printf("%d-", proc->pc);
-  unsigned char c = vm->memory[proc->pc % MEM_SIZE];
+  
   if (vm->current_cycle - vm->last_die_cycle == vm->cycle_to_die &&
       proc->last_live_cycle <= vm->last_die_cycle)
     return (process_kill(vm, (t_process **) proc_ptr));
+  if (on_cooldown(vm, proc))
+    return ;
   else if ((op = parse_operation(vm->memory[proc->pc % MEM_SIZE]))->code != OP_NULL &&
-	   (param_bytes = parse_params(proc, vm->memory, op, params)))
-    {
-      op->execute(vm, proc, params);
-      display_format("done%d", param_bytes);
-      if (op->code != OP_ZJMP)
-	proc->pc += param_bytes;
-    }
+	   parse_params(proc, vm->memory, op, params))
+    proc->cycle_cooldown = op->cycles;
   else
     proc->pc++;
 }
@@ -46,7 +63,6 @@ static void	check_end(t_vm *vm)
   previous = NULL;
   if (!(elem = vm->processes->first))
     {
-      display("There is no winner.\n", false);
       vm->running = false;
       return ;
     }
@@ -58,7 +74,7 @@ static void	check_end(t_vm *vm)
       previous = elem;
       elem = elem->next;
     }
-  display_format("The player %d(%s) has won.",
+  display_format("The player %d(%s) has won.\n",
 		 ((t_process *) previous->get)->id,
 		 ((t_process *) previous->get)->name);
 }
@@ -77,6 +93,7 @@ void		launch_cycles(t_vm *vm)
 	  next = elem->next;
 	  on_cycle(vm, &(elem->get));
 	  elem = next;
+	  check_end(vm);
 	}
       if ((vm->live_cooldown) <= 0)
 	{
@@ -85,6 +102,7 @@ void		launch_cycles(t_vm *vm)
 	}
       if (vm->current_cycle - vm->last_die_cycle == vm->cycle_to_die)
 	vm->last_die_cycle = vm->current_cycle;
-      check_end(vm);
+      if (!(--(vm->dump_cooldown)) && !(vm->running = false))
+	dump_memory(vm->memory, 32);
     }
 }

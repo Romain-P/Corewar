@@ -5,11 +5,12 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 23:25:16 2017 romain pillot
-** Last update Sun Apr  2 16:14:13 2017 romain pillot
+** Last update Sun Apr  2 20:09:19 2017 romain pillot
 */
 
 #include "vm.h"
 #include "operation.h"
+#include "util.h"
 
 static t_op	ops[] =
   {
@@ -41,7 +42,7 @@ int	parse_value(t_param param, t_vm *vm, t_process *process, char flag)
   if (param.type == T_DIR)
     return (param.value);
   else if (param.type == T_REG)
-    return (param.value > 16 || param.value <= 0 : -1 :
+    return (param.value > 16 || param.value <= 0 ? -1 :
 	    process->registers[param.value - 1]);
   modulo = param_type(flag, 0) == 1;
   bytes = param_type(flag, 1) == T_REG ? REG_SIZE :
@@ -57,17 +58,24 @@ int	parse_value(t_param param, t_vm *vm, t_process *process, char flag)
 		       vm->memory[(process->pc + 3 + param.value % mod) % MEM_SIZE]));
 }
 
-int		parse_params(t_process *process,
-			     unsigned char mem[MEM_SIZE],
-			     t_op *op,
-			     t_param params[4])
+int			parse_params(t_process *process,
+				     unsigned char mem[MEM_SIZE],
+				     t_op *op,
+				     t_param params[4])
 {
-  int		i;
-  int		pc;
+  int			i;
+  int			pc;
   unsigned char		coding_byte;
-  static int	(* const x[3])(t_process *p, unsigned char m[MEM_SIZE], int *pc) =
+  static int		(* const x[3])(t_process *p, unsigned char m[MEM_SIZE], int *pc) =
     { &type_register, &type_direct, &type_indirect };
-
+  
+  if (op->code == OP_LIVE || op->code == OP_ZJMP || op->code == OP_FORK ||
+      op->code == OP_LFORK)
+    {
+      params[0].value = bytes_to_int(0,0, mem[process->pc % MEM_SIZE],
+				     mem[(process->pc + 1) % MEM_SIZE]);
+      return (op->code == OP_ZJMP ? 0 : 2);
+    }
   coding_byte = mem[(process->pc + 1) % MEM_SIZE];
   pc = 2;
   i = -1;
@@ -75,8 +83,7 @@ int		parse_params(t_process *process,
     {
       if ((params[i].type = param_type(coding_byte, i)) != T_DIR &&
 	  params[i].type != T_IND && params[i].type != T_REG)
-        return (0);
-      printf("cb:%d-", coding_byte);
+	return (0);
       params[i].value = x[params[i].type - 1](process, mem, &pc);
     }
   return (pc);
