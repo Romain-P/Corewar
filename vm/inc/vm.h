@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:32:39 2017 romain pillot
-** Last update Sat Apr  1 06:01:32 2017 romain pillot
+** Last update Sun Apr  2 09:56:00 2017 romain pillot
 */
 
 #ifndef VM_H_
@@ -24,8 +24,7 @@
 */
 # define T_REG			1
 # define T_DIR			2
-# define T_IND			4
-# define T_LAB			8
+# define T_IND			3
 
 /*
 ** Number of registers per processus
@@ -62,15 +61,37 @@
 # define IDX_MOD		512
 # define MAX_ARGS_NUMBER	4
 
-typedef struct	op_s
-{
-  char		*mnemonique;
-  char		ac;
-  char		type[MAX_ARGS_NUMBER];
-  char		code;
-  int		cycles;
-  char		*comment;
-}		op_t;
+/*
+** Op's constant mnemonique values
+*/
+# define OPS_NBR		16
+# define OP_NULL		0x00
+# define OP_LIVE		0x01
+# define OP_LD			0x02
+# define OP_ST			0x03
+# define OP_ADD			0x04
+# define OP_SUB			0x05
+# define OP_AND			0x06
+# define OP_OR			0x07
+# define OP_XOR			0x08
+# define OP_ZJMP		0x09
+# define OP_LDI			0x0A
+# define OP_STI			0x0B
+# define OP_FORK		0x0C
+# define OP_LLD			0x0D
+# define OP_LLDI		0x0E
+# define OP_LFORK		0x0F
+# define OP_AFF			0x10
+
+/*
+** FLAGS to get value from address
+*/
+# define NO_MOD			0b00000000
+# define MOD			0b01000000
+# define REG			0b00010000
+# define IND			0b00100000
+# define MOD_AND_IND		MOD | IND
+# define MOD_AND_REG		MOD | REG
 
 /*
 ** On process Fork:
@@ -88,7 +109,7 @@ typedef struct	s_process
   int		pc;
   int		cycle_cooldown;
   int		last_live_cycle;
-  char		registers[REG_NUMBER][REG_SIZE];
+  int		registers[REG_NUMBER];
 }		t_process;
 
 typedef struct	s_vm
@@ -103,6 +124,20 @@ typedef struct	s_vm
   t_list	*processes;
 }		t_vm;
 
+typedef struct	s_param
+{
+  int		value;
+  char		type;
+}		t_param;
+
+typedef struct  s_op
+{
+  int           code;
+  char          args;
+  int           cycles;
+  void          (*execute)(t_vm *vm, t_process *process, t_param params[4]);
+}               t_op;
+
 t_process	*process_init(t_vm *vm, char *prog, int id, int start_pc);
 
 void		process_kill(t_vm *vm, t_process **ptr);
@@ -114,12 +149,27 @@ int		bytes_to_int(unsigned char a,
 			     unsigned char c,
 			     unsigned char d);
 
+char		param_type(char coding_byte, int index);
+  
 void		decode_header_name(char name[PROG_NAME_LENGTH], unsigned char *content);
 
 bool		valid_program(unsigned char *prog_content);
 
-void		dump_memory(char memory[MEM_SIZE]);
+void		dump_memory(char memory[MEM_SIZE], int bline);
 
 void		launch_cycles(t_vm *vm);
+
+t_op		*parse_operation(unsigned char p);
+
+int		parse_params(t_process *process, char mem[MEM_SIZE], t_op *op,
+			     t_param params[4]);
+
+int		parse_value(t_param params, t_vm *vm, t_process *process, char flag);
+
+int		type_direct(t_process *process, char mem[MEM_SIZE], int *pc);
+
+int		type_register(t_process *process, char mem[MEM_SIZE], int *pc);
+
+int		type_indirect(t_process *process, char mem[MEM_SIZE], int *pc);
 
 #endif /** !VM_H_ **/

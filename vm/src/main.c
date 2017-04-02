@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:33:03 2017 romain pillot
-** Last update Sat Apr  1 07:43:06 2017 romain pillot
+** Last update Sat Apr  1 12:03:56 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -53,19 +53,20 @@ int	main(int ac, char **args)
     return (free_and_exit(&vm, 84,
 			  "Error: need at least 2 programs and at most 4 programs.\n"));
   launch_cycles(vm);
-  dump_memory(vm->memory);
+  dump_memory(vm->memory, 150);
   return (free_and_exit(&vm, EXIT_SUCCESS, NULL));
 }
 
-void	dump_memory(char memory[MEM_SIZE])
+void	dump_memory(char memory[MEM_SIZE], int bline)
 {
-  int i;
-
+  int	i;
+  int	counter;
   i = -1;
+  counter = 0;
   while (++i < MEM_SIZE)
     {
-      display_format("%d-", memory[i]);
-      if (i && !(i % 32))
+      putnbr_hexa(memory[i], &counter, bline);
+      if (!(counter % bline))
 	display_char('\n', false);
     }
   display_char('\n', false);

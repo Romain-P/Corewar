@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Wed Mar 29 15:41:26 2017 Antonin Rapini
-** Last update Sat Apr  1 07:36:45 2017 Antonin Rapini
+** Last update Sat Apr  1 23:18:45 2017 romain pillot
 */
 
 #include "my_asm.h"
@@ -13,25 +13,25 @@
 #include "sources.h"
 #include <stdlib.h>
 
-static t_op op_tab[] =
+static op_t op_tab[] =
 {
-  {"live", 1, {T_DIR}, 1},
-  {"ld", 2, {T_DIR | T_IND, T_REG}, 2},
-  {"st", 2, {T_REG, T_IND | T_REG}, 3},
-  {"add", 3, {T_REG, T_REG, T_REG}, 4},
-  {"sub", 3, {T_REG, T_REG, T_REG}, 5},
-  {"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6},
-  {"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7},
-  {"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8},
-  {"zjmp", 1, {T_DIR}, 9},
-  {"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10},
-  {"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11},
-  {"fork", 1, {T_DIR}, 12},
-  {"lld", 2, {T_DIR | T_IND, T_REG}, 13},
-  {"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14},
-  {"lfork", 1, {T_DIR}, 15},
-  {"aff", 1, {T_REG}, 16},
-  {0, 0, {0}, 0}
+  {OP_LIVE, 1, {T_DIR}, 10},
+  {OP_LD, 2, {T_DIR | T_IND, T_REG}, 5},
+  {OP_ST, 2, {T_REG, T_IND | T_REG}, 5},
+  {OP_ADD, 3, {T_REG, T_REG, T_REG}, 10},
+  {OP_SUB, 3, {T_REG, T_REG, T_REG}, 10},
+  {OP_AND, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6},
+  {OP_OR, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 6},
+  {OP_XOR, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 6},
+  {OP_ZJMP, 1, {T_DIR}, 20},
+  {OP_LDI, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 25},
+  {OP_STI, 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 25},
+  {OP_FORK, 1, {T_DIR}, 800},
+  {OP_LLD, 2, {T_DIR | T_IND, T_REG}, 10},
+  {OP_LLDI, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 50},
+  {OP_LFORK, 1, {T_DIR}, 1000},
+  {OP_AFF, 1, {T_REG}, 2},
+  {0, 0, {0}}
 };
 
 int	my_get_codingbyte(int code, t_param *params)

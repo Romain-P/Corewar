@@ -5,7 +5,7 @@
 ## Login   <romain.pillot@epitech.net>
 ## 
 ## Started on  Sat Oct 29 17:09:21 2016 romain pillot
-## Last update Sat Apr  1 03:47:12 2017 romain pillot
+## Last update Sun Apr  2 06:11:25 2017 romain pillot
 ##
 
 CC	=	gcc
@@ -15,13 +15,32 @@ NAME	=	corewar
 RM	=	rm -f
 
 SRCS	=	src/main.c			\
-		src/core.c			\
+		src/cycle_handler.c		\
 		src/option.c			\
 		src/list.c			\
 		src/encoder.c			\
 		src/process.c			\
 		src/file.c			\
+		src/parser.c			\
+		src/parser_type.c		\
+		src/operation/op_live.c		\
+		src/operation/op_ld.c		\
+		src/operation/op_st.c		\
+		src/operation/op_and.c		\
+		src/operation/op_add.c		\
+		src/operation/op_sub.c		\
+		src/operation/op_or.c		\
+		src/operation/op_xor.c		\
+		src/operation/op_zjmp.c		\
+		src/operation/op_ldi.c		\
+		src/operation/op_sti.c		\
+		src/operation/op_fork.c		\
+		src/operation/op_lld.c		\
+		src/operation/op_lldi.c		\
+		src/operation/op_lfork.c	\
+		src/operation/op_aff.c		\
 		src/util/nbr_util.c		\
+		src/util/nbr_util_more.c	\
 		src/util/out_util.c		\
 		src/util/scanner.c		\
 		src/util/tab_util.c		\

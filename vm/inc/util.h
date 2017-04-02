@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar  2 16:17:22 2017 romain pillot
-** Last update Sat Apr  1 02:29:58 2017 romain pillot
+** Last update Sat Apr  1 11:52:27 2017 romain pillot
 */
 
 #ifndef UTIL_H_
@@ -56,6 +56,8 @@ bool	safe_free(void *ptr);
 int	getnbr(char *str);
 
 void	putnbr(int nbr, bool err);
+
+void	putnbr_hexa(unsigned char nbr, int *counter, int bline);
 
 void	display_format(char *str, ...);
 

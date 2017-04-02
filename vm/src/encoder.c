@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 14:06:31 2017 romain pillot
-** Last update Sat Apr  1 00:50:47 2017 romain pillot
+** Last update Sun Apr  2 05:25:03 2017 romain pillot
 */
 
 #include "vm.h"
@@ -17,6 +17,19 @@ int	bytes_to_int(unsigned char a,
 		     unsigned char d)
 {
   return ((a << 24) + (b << 16) + (c << 8) + d);
+}
+
+/*
+** char a = 0x78 (01 11 10 00)
+** param_type(a, 2)
+** -> 3 - 2 = 1
+** -> 2 * 1 = 2
+** -> a >> 2 = 00 01 11 10
+** -> & 3 = 00 00 00 10
+*/
+char	param_type(char coding_byte, int index)
+{
+  return ((coding_byte >> (2 * (3 - index))) & 3);
 }
 
 bool	valid_program(unsigned char *bytes)
