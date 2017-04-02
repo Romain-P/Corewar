@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Thu Mar  2 17:18:39 2017 Antonin Rapini
-** Last update Fri Mar 31 21:40:54 2017 Antonin Rapini
+** Last update Sun Apr  2 08:11:11 2017 Antonin Rapini
 */
 
 #ifndef UTILS_H_
@@ -34,8 +34,6 @@ t_param *my_str_to_params(char *);
 int my_miniprintf(char *, ...);
 void my_put_nbr(int);
 void *my_free(void *);
-char *my_int_tostr(int);
-int my_nbrlen(int);
 int my_line_iscode(char *);
 t_labellist *my_init_labellist_item();
 void *my_free_labellist_item(t_labellist *);

@@ -5,7 +5,7 @@
 ** Login   <antonin.rapini@epitech.net>
 ** 
 ** Started on  Sun Mar 12 20:25:38 2017 Antonin Rapini
-** Last update Wed Mar 29 04:52:58 2017 Antonin Rapini
+** Last update Sun Apr  2 08:12:54 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
@@ -27,7 +27,7 @@ char	**my_init_wordtab(int size)
   return (wordtab);
 }
 
-void my_free_wordtab(char **tab)
+void	my_free_wordtab(char **tab)
 {
   int	i;
 

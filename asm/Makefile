@@ -5,7 +5,7 @@
 ## Login   <antonin.rapini@epitech.net>
 ## 
 ## Started on  Tue Nov 29 08:50:17 2016 Antonin Rapini
-## Last update Fri Mar 31 21:47:16 2017 Antonin Rapini
+## Last update Sun Apr  2 08:10:59 2017 Antonin Rapini
 ##
 
 CFLAGS	+= -Wall -Werror -Wextra
@@ -27,8 +27,6 @@ SRC	=	utils/my_open_champion.c	\
 		utils/my_getnbr.c		\
 		utils/my_miniprintf.c		\
 		utils/my_put_nbr.c		\
-		utils/my_int_tostr.c		\
-		utils/my_nbrlen.c		\
 		utils/my_line_iscode.c		\
 		utils/my_labellist_utils.c	\
 		utils/my_instlist_utils.c	\
