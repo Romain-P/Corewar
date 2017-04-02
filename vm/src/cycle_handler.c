@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 03:46:54 2017 romain pillot
-** Last update Sun Apr  2 15:09:09 2017 romain pillot
+** Last update Sun Apr  2 15:30:51 2017 romain pillot
 */
 
 #include "vm.h"
@@ -30,7 +30,7 @@ static void	on_cycle(t_vm *vm, void **proc_ptr)
 	   (param_bytes = parse_params(proc, vm->memory, op, params)))
     {
       op->execute(vm, proc, params);
-      display("done", false);
+      display_format("done%d", param_bytes);
       if (op->code != OP_ZJMP)
 	proc->pc += param_bytes;
     }

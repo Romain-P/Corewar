@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 23:25:16 2017 romain pillot
-** Last update Sun Apr  2 14:37:45 2017 romain pillot
+** Last update Sun Apr  2 16:14:13 2017 romain pillot
 */
 
 #include "vm.h"
@@ -41,7 +41,8 @@ int	parse_value(t_param param, t_vm *vm, t_process *process, char flag)
   if (param.type == T_DIR)
     return (param.value);
   else if (param.type == T_REG)
-    return (process->registers[param.value - 1]);
+    return (param.value > 16 || param.value <= 0 : -1 :
+	    process->registers[param.value - 1]);
   modulo = param_type(flag, 0) == 1;
   bytes = param_type(flag, 1) == T_REG ? REG_SIZE :
     param_type(flag, 1) == T_IND ? IND_SIZE : 1;
@@ -57,14 +58,14 @@ int	parse_value(t_param param, t_vm *vm, t_process *process, char flag)
 }
 
 int		parse_params(t_process *process,
-			     char mem[MEM_SIZE],
+			     unsigned char mem[MEM_SIZE],
 			     t_op *op,
 			     t_param params[4])
 {
   int		i;
   int		pc;
-  char		coding_byte;
-  static int	(* const funcs[3])(t_process *p, char m[MEM_SIZE], int *pc) =
+  unsigned char		coding_byte;
+  static int	(* const x[3])(t_process *p, unsigned char m[MEM_SIZE], int *pc) =
     { &type_register, &type_direct, &type_indirect };
 
   coding_byte = mem[(process->pc + 1) % MEM_SIZE];
@@ -75,7 +76,8 @@ int		parse_params(t_process *process,
       if ((params[i].type = param_type(coding_byte, i)) != T_DIR &&
 	  params[i].type != T_IND && params[i].type != T_REG)
         return (0);
-	params[i].value = funcs[params[i].type - 1](process, mem, &pc);
+      printf("cb:%d-", coding_byte);
+      params[i].value = x[params[i].type - 1](process, mem, &pc);
     }
   return (pc);
 }

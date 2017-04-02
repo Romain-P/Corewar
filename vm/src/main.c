@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:33:03 2017 romain pillot
-** Last update Sat Apr  1 12:03:56 2017 romain pillot
+** Last update Sun Apr  2 15:49:12 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -57,7 +57,7 @@ int	main(int ac, char **args)
   return (free_and_exit(&vm, EXIT_SUCCESS, NULL));
 }
 
-void	dump_memory(char memory[MEM_SIZE], int bline)
+void	dump_memory(unsigned char memory[MEM_SIZE], int bline)
 {
   int	i;
   int	counter;

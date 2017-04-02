@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:32:39 2017 romain pillot
-** Last update Sun Apr  2 14:40:52 2017 romain pillot
+** Last update Sun Apr  2 15:46:40 2017 romain pillot
 */
 
 #ifndef VM_H_
@@ -156,22 +156,23 @@ void		decode_header_name(char name[PROG_NAME_LENGTH],
 
 bool		valid_program(unsigned char *prog_content);
 
-void		dump_memory(char memory[MEM_SIZE], int bline);
+void		dump_memory(unsigned char memory[MEM_SIZE], int bline);
 
 void		launch_cycles(t_vm *vm);
 
 t_op		*parse_operation(unsigned char p);
 
-int		parse_params(t_process *process, char mem[MEM_SIZE], t_op *op,
+int		parse_params(t_process *process, unsigned char mem[MEM_SIZE],
+			     t_op *op,
 			     t_param params[4]);
 
 int		parse_value(t_param params,
 			    t_vm *vm, t_process *process, char flag);
 
-int		type_direct(t_process *process, char mem[MEM_SIZE], int *pc);
+int		type_direct(t_process *process, unsigned char mem[MEM_SIZE], int *pc);
 
-int		type_register(t_process *process, char mem[MEM_SIZE], int *pc);
+int		type_register(t_process *process, unsigned char mem[MEM_SIZE], int *pc);
 
-int		type_indirect(t_process *process, char mem[MEM_SIZE], int *pc);
+int		type_indirect(t_process *process, unsigned char mem[MEM_SIZE], int *pc);
 
 #endif /** !VM_H_ **/

@@ -5,12 +5,12 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sun Apr  2 05:40:37 2017 romain pillot
-** Last update Sun Apr  2 06:29:22 2017 romain pillot
+** Last update Sun Apr  2 15:45:52 2017 romain pillot
 */
 
 #include "vm.h"
 
-int	type_register(t_process *process, char mem[MEM_SIZE], int *pc)
+int	type_register(t_process *process, unsigned char mem[MEM_SIZE], int *pc)
 {
   int	value;
 
@@ -19,7 +19,7 @@ int	type_register(t_process *process, char mem[MEM_SIZE], int *pc)
   return (value);
 }
 
-int	type_indirect(t_process *process, char mem[MEM_SIZE], int *pc)
+int	type_indirect(t_process *process, unsigned char mem[MEM_SIZE], int *pc)
 {
   int	value;
 
@@ -30,7 +30,7 @@ int	type_indirect(t_process *process, char mem[MEM_SIZE], int *pc)
   return (value);
 }
 
-int     type_direct(t_process *process, char mem[MEM_SIZE], int *pc)
+int     type_direct(t_process *process, unsigned char mem[MEM_SIZE], int *pc)
 {
   int   value;
 

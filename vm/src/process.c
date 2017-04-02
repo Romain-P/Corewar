@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 12:48:47 2017 romain pillot
-** Last update Sun Apr  2 12:37:46 2017 romain pillot
+** Last update Sun Apr  2 15:48:54 2017 romain pillot
 */
 
 #include "vm.h"
@@ -63,7 +63,7 @@ t_process       *process_init(t_vm *vm, char *prog, int id, int start_pc)
 ** TODO: improve space between processes when a
 **       starting address is specified (currently jump + 100 bytes)
 */
-static void	write_data(char *data, int len, char mem[MEM_SIZE], int index)
+static void	write_data(char *data, int len, unsigned char mem[MEM_SIZE], int index)
 {
   int		i;
   bool		enough_place;
