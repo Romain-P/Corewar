@@ -5,10 +5,11 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sun Apr  2 03:16:05 2017 romain pillot
-** Last update Sun Apr  2 17:26:21 2017 Antonin Rapini
+** Last update Sun Apr  2 20:58:15 2017 romain pillot
 */
 
 #include "operation.h"
+#include "util.h"
 
 void	op_aff(t_vm *vm, t_process *process, t_param params[4])
 {

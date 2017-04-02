@@ -5,12 +5,11 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sun Apr  2 03:16:05 2017 romain pillot
-** Last update Sun Apr  2 09:51:06 2017 romain pillot
+** Last update Sun Apr  2 21:17:29 2017 romain pillot
 */
 
 #include "operation.h"
 
 void	op_lfork(t_vm *vm, t_process *process, t_param params[4])
 {
-  
 }

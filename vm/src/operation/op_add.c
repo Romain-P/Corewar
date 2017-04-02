@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sun Apr  2 03:16:05 2017 romain pillot
-** Last update Sun Apr  2 15:55:34 2017 Antonin Rapini
+** Last update Sun Apr  2 21:19:20 2017 romain pillot
 */
 
 #include "operation.h"
@@ -22,10 +22,9 @@ void	op_add(t_vm *vm, t_process *process, t_param params[4])
   if (registera > 16 || registerb > 16 || registerc > 16 || registera <= 0
       || registerb <= 0 || registerc <= 0)
     {
-      //process->carry = 0;
+
       return ;
     }
   process->registers[registerc - 1] =
     process->registers[registera - 1] + process->registers[registerb - 1];
-  //process->carry = 1;
 }

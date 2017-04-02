@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sun Apr  2 03:16:05 2017 romain pillot
-** Last update Sun Apr  2 17:09:20 2017 Antonin Rapini
+** Last update Sun Apr  2 21:18:56 2017 romain pillot
 */
 
 #include "operation.h"
@@ -16,14 +16,12 @@ void	op_xor(t_vm *vm, t_process *process, t_param params[4])
   int   value2;
   int   reg;
 
-  value1 = parse_value(param[0], NO_MOD);
-  value2 = parse_value(param[1], NO_MOD);
-  reg = parse_value(param[2], NO_MOD);
+  value1 = parse_value(params[0], vm, process, NO_MOD);
+  value2 = parse_value(params[1], vm, process, NO_MOD);
+  reg = parse_value(params[2], vm, process, NO_MOD);
   if (reg > 16 || reg <= 0)
     {
-      process->carry = 0;
       return ;
     }
   process->registers[reg - 1] = value1 ^ value2;
-  process->carry = 1;  
 }

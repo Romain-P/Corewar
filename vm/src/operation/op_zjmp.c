@@ -5,12 +5,11 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sun Apr  2 03:16:05 2017 romain pillot
-** Last update Sun Apr  2 09:54:53 2017 romain pillot
+** Last update Sun Apr  2 21:19:08 2017 romain pillot
 */
 
 #include "operation.h"
 
 void	op_zjmp(t_vm *vm, t_process *process, t_param params[4])
 {
-  
 }

@@ -5,10 +5,12 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sun Apr  2 03:16:05 2017 romain pillot
-** Last update Sun Apr  2 15:28:58 2017 Antonin Rapini
+** Last update Sun Apr  2 21:05:19 2017 romain pillot
 */
 
 #include "operation.h"
+#include <stdlib.h>
+#include "util.h"
 
 void		op_live(t_vm *vm, t_process *process, t_param params[4])
 {
@@ -21,9 +23,11 @@ void		op_live(t_vm *vm, t_process *process, t_param params[4])
   value = parse_value(params[0], vm, process, NO_MOD);
   while (curr != NULL)
     {
-      if (value == curr->get->id)
+      if (value == ((t_process *) curr->get)->id)
 	{
-	  curr->get->last_live_cycle = vm->current_cycle;
+	  ((t_process *) curr->get)->last_live_cycle = vm->current_cycle;
+	  display_format("The player %d(%s) is alive.\n",
+			 process->id, process->name);
 	  return ;
 	}
       curr = curr->next;

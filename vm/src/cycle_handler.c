@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 03:46:54 2017 romain pillot
-** Last update Sun Apr  2 20:07:40 2017 romain pillot
+** Last update Sun Apr  2 21:01:20 2017 romain pillot
 */
 
 #include "vm.h"
@@ -77,6 +77,7 @@ static void	check_end(t_vm *vm)
   display_format("The player %d(%s) has won.\n",
 		 ((t_process *) previous->get)->id,
 		 ((t_process *) previous->get)->name);
+  vm->running = false;
 }
 
 void		launch_cycles(t_vm *vm)
@@ -88,7 +89,7 @@ void		launch_cycles(t_vm *vm)
   while (vm->running && ++(vm->current_cycle))
     {
       elem = vm->processes->first;
-      while (elem)
+      while (elem && vm->running)
 	{
 	  next = elem->next;
 	  on_cycle(vm, &(elem->get));

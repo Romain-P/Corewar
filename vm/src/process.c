@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 12:48:47 2017 romain pillot
-** Last update Sun Apr  2 18:44:48 2017 romain pillot
+** Last update Sun Apr  2 21:26:03 2017 romain pillot
 */
 
 #include "vm.h"
@@ -42,9 +42,9 @@ t_process       *process_init(t_vm *vm, char *prog, int id, int start_pc)
     return (NULL);
   if (!valid_program(content) || !id || !start_pc)
     {
-      fdisplay_format(id && start_pc ?
-		      "%s: invalid program (invalid magic)\n" :
+      fdisplay_format(id && start_pc ? "%s: invalid program (invalid magic)\n" :
 		      "%s: invalid option's parameter ((int)param > 0)\n", prog);
+      free(content);
       free(process);
       return (NULL);
     }
