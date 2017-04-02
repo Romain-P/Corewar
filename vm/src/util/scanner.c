@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Tue Feb 21 11:35:52 2017 romain pillot
-** Last update Fri Mar  3 16:35:33 2017 romain pillot
+** Last update Sun Apr  2 14:16:17 2017 Antonin Rapini
 */
 
 #include <stdlib.h>
@@ -24,7 +24,7 @@ static char	*app(char *str, char c)
   while (str && str[i] && ++i);
   if (!(ap = malloc(sizeof(char) * (i + (!c ? 1 : 2)))))
     return (NULL);
-  while(str && j < i)
+  while (str && j < i)
     {
       ap[j] = str[j];
       j++;

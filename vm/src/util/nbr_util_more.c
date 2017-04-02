@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 08:46:33 2017 romain pillot
-** Last update Sat Apr  1 12:02:18 2017 romain pillot
+** Last update Sun Apr  2 14:18:46 2017 Antonin Rapini
 */
 
 #include "util.h"
@@ -37,7 +37,6 @@ static void	trash_split(int bline, int nbr, int base_length, int *counter)
     }
   (*counter)++;
   display_char(base[nbr / div], false);
-  //putch('\n', counter);
 }
 
 void     putnbr_hexa(unsigned char nbr, int *counter, int bline)

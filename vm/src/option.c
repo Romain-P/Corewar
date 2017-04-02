@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 12:19:11 2017 romain pillot
-** Last update Fri Mar 31 21:07:02 2017 romain pillot
+** Last update Sun Apr  2 14:15:29 2017 Antonin Rapini
 */
 
 #include "vm.h"
@@ -13,7 +13,8 @@
 #include <stdlib.h>
 #include "util.h"
 
-static bool	(* const opt_funcs[])(t_vm *vm, char *arg, char *prog, int mod[2]) =
+static bool	(* const opt_funcs[])(t_vm *vm,
+				      char *arg, char *prog, int mod[2]) =
 {
   &opt_help,
   &opt_dump,
@@ -26,7 +27,7 @@ static bool	(* const opt_funcs[])(t_vm *vm, char *arg, char *prog, int mod[2]) =
 */
 static int	i = 0;
 
-bool	valid_options(t_vm *vm, int ac, char **args)
+bool		valid_options(t_vm *vm, int ac, char **args)
 {
   char		opt;
   char		*arg;
@@ -74,7 +75,8 @@ bool	opt_help(t_vm *vm, char *arg, char *prog, int mod[2])
 	  "\t\t\tin the parameter order\n"
 	  "\t-a load_address "
 	  "sets the next program's loading address.  When no address is\n"
-	  "\t\t\tspecified, optimize the addresses so that the processes are as far\n"
+	  "\t\t\tspecified, optimize the"
+	  "addresses so that the processes are as far\n"
 	  "\t\t\taway from each other as possible.  "
 	  "The addresses are MEM_SIZE modulo\n", false);
   return (false);

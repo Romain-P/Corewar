@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar 29 10:32:39 2017 romain pillot
-** Last update Sun Apr  2 09:56:00 2017 romain pillot
+** Last update Sun Apr  2 14:13:20 2017 Antonin Rapini
 */
 
 #ifndef VM_H_
@@ -150,8 +150,9 @@ int		bytes_to_int(unsigned char a,
 			     unsigned char d);
 
 char		param_type(char coding_byte, int index);
-  
-void		decode_header_name(char name[PROG_NAME_LENGTH], unsigned char *content);
+
+void		decode_header_name(char name[PROG_NAME_LENGTH],
+				   unsigned char *content);
 
 bool		valid_program(unsigned char *prog_content);
 
@@ -164,7 +165,8 @@ t_op		*parse_operation(unsigned char p);
 int		parse_params(t_process *process, char mem[MEM_SIZE], t_op *op,
 			     t_param params[4]);
 
-int		parse_value(t_param params, t_vm *vm, t_process *process, char flag);
+int		parse_value(t_param params,
+			    t_vm *vm, t_process *process, char flag);
 
 int		type_direct(t_process *process, char mem[MEM_SIZE], int *pc);
 

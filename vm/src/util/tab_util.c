@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar  8 13:58:37 2017 romain pillot
-** Last update Wed Mar 15 11:35:05 2017 romain pillot
+** Last update Sun Apr  2 14:17:50 2017 Antonin Rapini
 */
 
 #include "util.h"
@@ -44,7 +44,7 @@ char    **filltab(char **tab, void *e, int size)
   if (!tab)
     return (NULL);
   i = -1;
-  while(++i < size)
+  while (++i < size)
     tab[i] = e;
   return (tab);
 }

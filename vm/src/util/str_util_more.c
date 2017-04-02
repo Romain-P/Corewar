@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar  8 10:25:12 2017 romain pillot
-** Last update Fri Mar 31 15:46:28 2017 romain pillot
+** Last update Sun Apr  2 14:19:29 2017 Antonin Rapini
 */
 
 #include <stdbool.h>
@@ -56,8 +56,8 @@ char	*concatstr(char *a, char *b, bool free_a)
   char	*hold;
   char	*hold_a;
 
-  if (!(hold = (concat = malloc(sizeof(char) * (str_length(a) +
-						str_length(b) + 1)))))
+  if (!(hold = (concat = malloc(sizeof(char) *
+				(str_length(a) + str_length(b) + 1)))))
     return (NULL);
   hold_a = a;
   while (a && *a)

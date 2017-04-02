@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar 30 14:03:00 2017 romain pillot
-** Last update Sat Apr  1 03:27:33 2017 romain pillot
+** Last update Sun Apr  2 14:20:21 2017 Antonin Rapini
 */
 
 #include "util.h"
@@ -23,15 +23,14 @@ char			*file_content(t_process *process, int file)
 
   content = NULL;
   len = 0;
-  while ((bytes = read(file, buffer, 1024)))
+  while ((bytes = read(file, buffer, 1024)) && bytes != -1)
     {
-      if (bytes == -1)
-        break;
       buffer[bytes] = 0;
       len += bytes;
       content = !content ?
 	copystr(buffer, bytes, malloc(sizeof(char) * (len + 1)), 0) :
-	copystr(buffer, bytes, realloc(content, sizeof(char) * (len + 1)), len - bytes);
+	copystr(buffer, bytes, realloc(content,
+				       sizeof(char) * (len + 1)), len - bytes);
     }
   if (bytes == -1)
     {
