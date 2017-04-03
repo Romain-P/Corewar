@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Sat Apr  1 03:46:54 2017 romain pillot
-** Last update Sun Apr  2 21:01:20 2017 romain pillot
+** Last update Mon Apr  3 08:16:27 2017 romain pillot
 */
 
 #include "vm.h"
@@ -41,8 +41,7 @@ static void	on_cycle(t_vm *vm, void **proc_ptr)
   t_param	params[4];
   int		param_bytes;
 
-  proc = (t_process *) (*proc_ptr);
-  
+  proc = (t_process *) (*proc_ptr);  
   if (vm->current_cycle - vm->last_die_cycle == vm->cycle_to_die &&
       proc->last_live_cycle <= vm->last_die_cycle)
     return (process_kill(vm, (t_process **) proc_ptr));
